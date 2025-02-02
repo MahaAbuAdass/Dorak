@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/image1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"/>
+
+    <FrameLayout
+        android:id="@+id/frame_email"
+        app:layout_constraintTop_toBottomOf="@id/logo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="10dp">
+
+        <EditText
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            android:textSize="16sp"
+            android:id="@+id/et_mobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_edit_text"
+            android:drawableStart="@drawable/mobile"
+            android:hint="Enter your mobile number"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:drawablePadding="10dp"
+            android:inputType="textPassword"
+            android:textColorHint="@color/grey"
+            android:layout_gravity="center_vertical" />
+
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:id="@+id/frame_pass"
+        app:layout_constraintTop_toBottomOf="@id/frame_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="10dp">
+
+        <EditText
+            android:paddingStart="10dp"
+            android:textSize="16sp"
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_edit_text"
+            android:drawableStart="@drawable/lock"
+            android:drawableEnd="@drawable/eye"
+            android:paddingEnd="10dp"
+            android:hint="Enter your password"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:drawablePadding="10dp"
+            android:inputType="textPassword"
+            android:textColorHint="@color/grey"
+            android:layout_gravity="center_vertical" />
+
+    </FrameLayout>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkbox"
+        app:layout_constraintTop_toBottomOf="@id/frame_pass"
+        app:layout_constraintStart_toStartOf="@id/frame_pass"
+        android:layout_marginStart="10dp"
+        android:text="Remember me"
+        android:textColor="@color/dark_grey"
+        android:buttonTint="@color/light_grey"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_forget_pass"
+        app:layout_constraintTop_toTopOf="@id/checkbox"
+        app:layout_constraintBottom_toBottomOf="@id/checkbox"
+        android:text="forget password?"
+        android:textColor="@color/green"
+        app:layout_constraintEnd_toEndOf="@id/frame_pass"
+/>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/checkbox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@color/green"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="Login"
+        android:textSize="20sp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/btn_login"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+            >
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Don’t have an account?"
+        android:id="@+id/tv_sign"
+        android:textColor="@color/grey"
+        app:layout_constraintTop_toBottomOf="@id/btn_login"
+        />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_sign_up"
+            android:text=" Sign Up"
+            android:textColor="@color/green"
+
+/>
+
+    </LinearLayout>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
