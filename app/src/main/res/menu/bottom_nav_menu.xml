@@ -1,0 +1,28 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home_selector"
+        android:title="Home"
+        app:itemIconTint="@drawable/nav_item_selector"
+        app:itemTextColor="@drawable/nav_item_selector"/>
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/profile"
+        android:title="More"
+        app:itemIconTint="@drawable/nav_item_selector"
+        app:itemTextColor="@drawable/nav_item_selector"/>
+    <item
+        android:id="@+id/nav_my_ticket"
+        android:icon="@drawable/myticket"
+        android:title="My Tickets"
+        app:itemIconTint="@drawable/nav_item_selector"
+        app:itemTextColor="@drawable/nav_item_selector"/>
+    <item
+        android:id="@+id/nav_more"
+        android:icon="@drawable/mobile"
+        android:title="Profile"
+        app:itemIconTint="@drawable/nav_item_selector"
+        app:itemTextColor="@drawable/nav_item_selector"/>
+</menu>

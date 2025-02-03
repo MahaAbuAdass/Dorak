@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/back"
+        android:layout_margin="20dp"
+        android:id="@+id/img_back"
+        />
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Irbid Mall Branch"
+        app:layout_constraintStart_toEndOf="@id/img_back"
+        app:layout_constraintTop_toTopOf="@id/img_back"
+        app:layout_constraintBottom_toBottomOf="@id/img_back"
+        android:textColor="@color/text_grey"
+        android:textSize="16sp"
+
+         />
+
+    <TextView
+        android:id="@+id/select_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pay Bill"
+        app:layout_constraintTop_toBottomOf="@id/img_back"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="20dp"
+        android:textColor="@color/green"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Irbid Mall Branch"
+        app:layout_constraintTop_toBottomOf="@id/select_service"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="17dp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/location_details"
+        app:layout_constraintTop_toBottomOf="@id/details"
+        app:layout_constraintStart_toStartOf="@id/details"
+        android:layout_marginTop="10dp"
+        android:id="@+id/location"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/map"
+        app:layout_constraintTop_toBottomOf="@id/location"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="15dp"
+        android:id="@+id/map"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/map"
+        android:orientation="horizontal"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/linear_layout"
+        android:weightSum="2"
+        >
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:id="@+id/cardview_getticket"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:strokeColor="@color/light_grey"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/wait"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:id="@+id/img_ticket"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/img_ticket"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="Estimated Waiting"
+                    android:textColor="@color/text_grey"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/tv_ticket"
+                    />
+                <TextView
+                    android:id="@+id/tv_get"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/tv_ticket"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="10m"
+                    android:textColor="@color/text_light_grey"
+                    android:layout_marginBottom="20dp"
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:id="@+id/spacer"
+                    app:layout_constraintTop_toBottomOf="@id/tv_get"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:strokeColor="@color/light_grey"
+            android:layout_marginStart="10dp"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/count"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:id="@+id/img_book_ticket"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/img_book_ticket"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="Waiting Count"
+                    android:textColor="@color/text_grey"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/tv_book_ticket"
+                    />
+                <TextView
+                    android:id="@+id/tv_book"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/tv_book_ticket"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="7"
+                    android:textColor="@color/text_light_grey"
+                    android:layout_marginBottom="20dp"
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:id="@+id/spacer_1"
+                    app:layout_constraintTop_toBottomOf="@id/tv_book"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/linear_layout"
+        android:text="Generate Ticket Now"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/btn_generate_ticket"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

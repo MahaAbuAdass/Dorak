@@ -22,7 +22,76 @@
         android:name="com.example.dorak.ui.LoginFragment"
         tools:layout="@layout/login_fragment"
         android:label="SplashScreen"
+        >
+        <action
+            android:id="@+id/action_loginScreen_to_homeActivity"
+            app:destination="@id/homeActivity" />
+    </fragment>
+
+
+    <activity
+        android:id="@+id/homeActivity"
+        android:name="com.example.dorak.ui.HomeActivity"
+        android:label="HomeActivity">
+        <action
+            android:id="@+id/action_homeScreen_to_getTicket"
+            app:destination="@id/getTicket" />
+    </activity>
+
+    <fragment
+        android:id="@+id/homeScreen"
+        android:name="com.example.dorak.ui.HomeFragment"
+        tools:layout="@layout/fragment_home"
+        android:label="HomeFragment"
+        >
+        <action
+            android:id="@+id/action_homeScreen_to_getTicket"
+            app:destination="@id/getTicket" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/getTicket"
+        android:name="com.example.dorak.ui.GetTicketFragment"
+        tools:layout="@layout/get_ticket_fragment"
+        android:label="TicketFragment"
+        >
+        <action
+            android:id="@+id/action_getTicket_to_paybill"
+            app:destination="@id/paybill" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/paybill"
+        android:name="com.example.dorak.ui.PayBillFragment"
+        tools:layout="@layout/pay_bill_fragment"
+        android:label="paybillFragment"
+        >
+        <action
+            android:id="@+id/action_paybill_to_paybillDetails"
+            app:destination="@id/paybillDetails" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/paybillDetails"
+        android:name="com.example.dorak.ui.PayBillDetails"
+        tools:layout="@layout/pay_bill_details"
+        android:label="paybillDetailsFragment"
+        >
+        <action
+            android:id="@+id/action_paybillDetails_to_ticketDetails"
+            app:destination="@id/ticketDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/ticketDetails"
+        android:name="com.example.dorak.ui.TicketDetails"
+        tools:layout="@layout/ticket_details"
+        android:label="ticketDetailsFragment"
         />
 
+    <fragment
+        android:id="@+id/myTicket"
+        android:name="com.example.dorak.ui.MyTicketsFragment"
+        tools:layout="@layout/my_tickets"
+        />
 
 </navigation>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Green color for selected item -->
+    <item android:color="@color/green" android:state_checked="true"/>
+    <!-- Grey color for unselected item -->
+    <item android:color="@color/text_light_grey"/>
+</selector>

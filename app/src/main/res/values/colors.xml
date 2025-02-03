@@ -7,6 +7,11 @@
 
     <color name="light_grey">#E5E7EB</color>
     <color name="dark_grey">#3B4453</color>
+    <color name="text_grey">#464646</color>
+    <color name="text_light_grey">#C8C9C8</color>
+    <color name="background_grey">#F9FAFB</color>
 
+
+    <color name="red">#FF5C5C</color>
 
 </resources>

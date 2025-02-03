@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- FragmentContainerView for the NavHostFragment -->
+    <!-- Fragment Container (NavHost) -->
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -14,7 +14,7 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph" />
 
-    <!-- BottomNavigationView (optional) -->
+    <!-- Bottom Navigation Bar -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"

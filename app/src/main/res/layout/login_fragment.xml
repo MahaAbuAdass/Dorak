@@ -44,10 +44,21 @@
 
     </FrameLayout>
 
+    <TextView
+        android:id="@+id/et_mobile_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This field is required"
+        android:textColor="@color/red"
+        app:layout_constraintStart_toStartOf="@id/frame_email"
+        app:layout_constraintTop_toBottomOf="@id/frame_email"
+        android:textSize="14sp"
+        android:visibility="gone" />
+
 
     <FrameLayout
         android:id="@+id/frame_pass"
-        app:layout_constraintTop_toBottomOf="@id/frame_email"
+        app:layout_constraintTop_toBottomOf="@id/et_mobile_error"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,17 +86,26 @@
             android:layout_gravity="center_vertical" />
 
     </FrameLayout>
+    <TextView
+        android:id="@+id/et_password_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This field is required"
+        app:layout_constraintStart_toStartOf="@id/frame_pass"
+        app:layout_constraintTop_toBottomOf="@id/frame_pass"
+        android:textColor="@color/red"
+        android:textSize="14sp"
+        android:visibility="gone" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/checkbox"
-        app:layout_constraintTop_toBottomOf="@id/frame_pass"
+        app:layout_constraintTop_toBottomOf="@id/et_password_error"
         app:layout_constraintStart_toStartOf="@id/frame_pass"
         android:layout_marginStart="10dp"
         android:text="Remember me"
-        android:textColor="@color/dark_grey"
-        android:buttonTint="@color/green"
+        android:textColor="@color/grey"
         />
 
     <TextView

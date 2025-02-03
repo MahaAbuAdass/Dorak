@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/back"
+        android:layout_margin="20dp"
+        android:id="@+id/img_back"
+        />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Tickets"
+        app:layout_constraintStart_toEndOf="@id/img_back"
+        app:layout_constraintTop_toTopOf="@id/img_back"
+        app:layout_constraintBottom_toBottomOf="@id/img_back"
+        android:textColor="@color/text_grey"
+        android:textSize="16sp"
+        />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:strokeColor="@color/light_grey"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:id="@+id/card_view_ticket_1"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        android:layout_marginTop="20dp"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="10dp"
+                android:text="Pay Bill"
+                android:textColor="@color/green"
+                android:textSize="20sp"
+                android:layout_margin="10dp"
+                android:id="@+id/tv_title_pay"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_pay"
+                app:layout_constraintStart_toStartOf="@id/tv_title_pay"
+                android:text="C1"
+                android:textColor="@color/text_light_grey"
+                android:textSize="22sp"
+                android:id="@+id/tv_number"
+                />
+
+
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/calender"
+                app:layout_constraintTop_toBottomOf="@id/tv_number"
+                app:layout_constraintStart_toStartOf="@id/tv_number"
+                android:layout_marginTop="5dp"
+                android:id="@+id/img_calender"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12 JAN 2025 - 10:00 AM"
+                android:textColor="@color/text_grey"
+                android:textSize="17sp"
+                android:id="@+id/tv_date"
+                app:layout_constraintTop_toTopOf="@id/img_calender"
+                app:layout_constraintBottom_toBottomOf="@id/img_calender"
+                app:layout_constraintStart_toEndOf="@id/img_calender"
+                android:layout_marginStart="10dp"
+                />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/map_grey"
+                app:layout_constraintTop_toBottomOf="@id/img_calender"
+                app:layout_constraintStart_toStartOf="@id/img_calender"
+                android:layout_marginTop="15dp"
+                android:id="@+id/img_map"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ibid Mall Branch"
+                android:textColor="@color/text_grey"
+                android:textSize="17sp"
+                android:id="@+id/tv_location"
+                app:layout_constraintTop_toTopOf="@id/img_map"
+                app:layout_constraintBottom_toBottomOf="@id/img_map"
+                app:layout_constraintStart_toEndOf="@id/img_map"
+                android:layout_marginStart="10dp"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cancel"
+                app:layout_constraintTop_toBottomOf="@id/img_map"
+                app:layout_constraintStart_toStartOf="parent"
+                android:backgroundTint="@color/white"
+                android:textColor="@color/green"
+                android:text="Cancel"
+                app:strokeColor="@color/green"
+                app:strokeWidth="1dp"
+                android:layout_margin="10dp"
+                android:textSize="16sp"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/cancel"
+                app:layout_constraintBottom_toBottomOf="@id/cancel"
+                app:layout_constraintStart_toEndOf="@id/cancel"
+                android:text="Check in"
+                android:paddingStart="60dp"
+                android:paddingEnd="60dp"
+                android:textSize="18sp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="15dp"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:id="@+id/spacer_1"
+                app:layout_constraintTop_toBottomOf="@id/cancel"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
