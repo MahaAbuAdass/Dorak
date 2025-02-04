@@ -1,4 +1,4 @@
-package com.example.dorak.ui
+package com.example.dorak.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +10,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.dorak.databinding.FragmentHomeBinding
+import com.example.dorak.ui.home.BannerAdapter
+import com.example.dorak.ui.home.BannerPageTransformer
 
 class HomeFragment : Fragment() {
 
@@ -53,6 +55,10 @@ class HomeFragment : Fragment() {
 
         binding.cardviewGetticket.setOnClickListener {
             findNavController().navigate(R.id.action_homeScreen_to_getTicket)
+        }
+
+        binding.cardviewBookTicket.setOnClickListener {
+            findNavController().navigate(R.id.action_homeScreen_to_bookTicketFragment)
         }
 
 

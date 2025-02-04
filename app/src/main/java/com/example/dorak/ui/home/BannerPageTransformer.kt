@@ -1,4 +1,4 @@
-package com.example.dorak.ui
+package com.example.dorak.ui.home
 
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2

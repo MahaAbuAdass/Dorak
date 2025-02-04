@@ -1,4 +1,4 @@
-package com.example.dorak.ui
+package com.example.dorak.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater

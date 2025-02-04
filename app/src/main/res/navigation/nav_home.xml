@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_home"
+    app:startDestination="@id/homeScreen">
+
+    <fragment
+        android:id="@+id/homeScreen"
+        android:name="com.example.dorak.ui.home.HomeFragment"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeScreen_to_getTicket"
+            app:destination="@id/getTicket" />
+        <action
+            android:id="@+id/action_homeScreen_to_bookTicketFragment"
+            app:destination="@id/bookTicketFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/myTicket"
+        android:name="com.example.dorak.ui.MyTicketsFragment"
+        tools:layout="@layout/my_tickets" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.example.dorak.ui.ProfileFragment"
+         />
+
+    <fragment
+        android:id="@+id/nav_more"
+        android:name="com.example.dorak.ui.MoreFragment"
+
+        />
+
+
+        <fragment
+            android:id="@+id/getTicket"
+            android:name="com.example.dorak.ui.home.GetTicketFragment"
+            tools:layout="@layout/get_ticket_fragment"
+            android:label="TicketFragment"
+            >
+            <action
+                android:id="@+id/action_getTicket_to_paybill"
+                app:destination="@id/paybill" />
+        </fragment>
+
+        <fragment
+            android:id="@+id/paybill"
+            android:name="com.example.dorak.ui.home.PayBillFragment"
+            tools:layout="@layout/pay_bill_fragment"
+            android:label="paybillFragment"
+            >
+            <action
+                android:id="@+id/action_paybill_to_paybillDetails"
+                app:destination="@id/paybillDetails" />
+        </fragment>
+
+        <fragment
+            android:id="@+id/paybillDetails"
+            android:name="com.example.dorak.ui.home.PayBillDetails"
+            tools:layout="@layout/pay_bill_details"
+            android:label="paybillDetailsFragment"
+            >
+            <action
+                android:id="@+id/action_paybillDetails_to_ticketDetails"
+                app:destination="@id/ticketDetails" />
+        </fragment>
+        <fragment
+            android:id="@+id/ticketDetails"
+            android:name="com.example.dorak.ui.home.TicketDetails"
+            tools:layout="@layout/ticket_details"
+            android:label="ticketDetailsFragment"
+            >
+            <action
+                android:id="@+id/action_ticketDetails_to_myTicketFragment"
+                app:destination="@id/myTicketFragment" />
+        </fragment>
+
+        <fragment
+            android:id="@+id/myTicketFragment"
+            android:name="com.example.dorak.ui.MyTicketsFragment"
+            tools:layout="@layout/my_tickets"
+            />
+
+    <fragment
+        android:id="@+id/bookTicketFragment"
+        android:name="com.example.dorak.ui.home.BookTicket"
+        tools:layout="@layout/book_ticket_fragment"
+        >
+        <action
+            android:id="@+id/action_bookTicketFragment_to_serviceDetailsFragment"
+            app:destination="@id/serviceDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/serviceDetailsFragment"
+        android:name="com.example.dorak.ui.home.ServiceDetailsFragment"
+        tools:layout="@layout/service_details_fragment"
+        />
+</navigation>

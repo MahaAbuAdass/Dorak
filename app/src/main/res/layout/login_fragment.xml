@@ -23,7 +23,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="20dp">
 
         <EditText
             android:paddingEnd="10dp"
@@ -35,11 +35,11 @@
             android:background="@drawable/custom_edit_text"
             android:drawableStart="@drawable/mobile"
             android:hint="Enter your mobile number"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
             android:drawablePadding="10dp"
             android:inputType="textPassword"
-            android:textColorHint="@color/grey"
+            android:textColorHint="@color/text_light_grey"
             android:layout_gravity="center_vertical" />
 
     </FrameLayout>
@@ -78,11 +78,11 @@
             android:drawableEnd="@drawable/eye"
             android:paddingEnd="10dp"
             android:hint="Enter your password"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
             android:drawablePadding="10dp"
             android:inputType="textPassword"
-            android:textColorHint="@color/grey"
+            android:textColorHint="@color/text_light_grey"
             android:layout_gravity="center_vertical" />
 
     </FrameLayout>

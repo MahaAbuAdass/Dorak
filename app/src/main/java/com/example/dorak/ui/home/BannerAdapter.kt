@@ -1,8 +1,6 @@
-package com.example.dorak.ui
+package com.example.dorak.ui.home
 
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.camera.viewfinder.core.ScaleType
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
 

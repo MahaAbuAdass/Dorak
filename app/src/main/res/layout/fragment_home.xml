@@ -163,6 +163,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:strokeColor="@color/green"
+                android:id="@+id/cardview_book_ticket"
                 android:layout_marginStart="10dp"
                 >
                 <androidx.constraintlayout.widget.ConstraintLayout
