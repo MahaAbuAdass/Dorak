@@ -47,6 +47,19 @@ class HomeFragment : Fragment() {
         val adapter = BannerAdapter(imageList)
         viewPager.adapter = adapter
 
+        // Prevent clipping so we can see part of next/previous images
+// Prevent clipping
+        viewPager.clipToPadding = false
+        viewPager.clipChildren = false
+        viewPager.offscreenPageLimit = 3
+
+// Page transformer for scaling effect
+        viewPager.setPageTransformer { page, position ->
+            val scaleFactor = 0.85f + (1 - kotlin.math.abs(position)) * 0.15f
+            page.scaleX = scaleFactor
+            page.scaleY = scaleFactor
+        }
+
         // Set the custom PageTransformer to show part of next and previous images
         viewPager.setPageTransformer(BannerPageTransformer())
         // Set up the listener for BottomNavigationView

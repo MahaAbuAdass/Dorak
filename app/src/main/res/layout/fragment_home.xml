@@ -59,15 +59,14 @@
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/bannerViewPager"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="330dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="20dp"
             android:clipToPadding="false"
-
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
+            android:clipChildren="false"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:overScrollMode="never"
             app:layout_constraintTop_toBottomOf="@id/name"
             />
 
