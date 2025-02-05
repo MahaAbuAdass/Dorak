@@ -108,24 +108,18 @@ class LoginFragment : Fragment() {
         loginViewModel.getLoginResponse.observe(viewLifecycleOwner) { response ->
             if (response != null) {
                 Log.d("LoginObserver", "✅ Success response received: $response")
+            //    Toast.makeText(requireContext(), "Login Successful", Toast.LENGTH_SHORT).show()
                 showPopup()  // Show success popup
             }
         }
 
         loginViewModel.errorResponse.observe(viewLifecycleOwner) { error ->
-            if (error != null && loginViewModel.getLoginResponse.value == null) {
+            if (error != null) {
                 Log.e("LoginObserver", "❌ Error response received: ${error.messageEn}")
-                val message = error.messageEn ?: "An unexpected error occurred"
-                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), error.messageEn ?: "An unexpected error occurred", Toast.LENGTH_SHORT).show()
             }
         }
     }
-
-
-
-
-
-
 
 
     private fun callLoginApi() {

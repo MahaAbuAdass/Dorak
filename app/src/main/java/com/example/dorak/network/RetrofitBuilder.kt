@@ -24,6 +24,7 @@ class RetrofitBuilder(context: Context) {
 
     suspend fun login(userName:String ,password:String) = apiService.login(userName,password)
     suspend fun getServices()=apiService.getAllServicesApi()
+    suspend fun getBranches(qId: String)=apiService.getBranchResopnse(qId)
 
 }
 

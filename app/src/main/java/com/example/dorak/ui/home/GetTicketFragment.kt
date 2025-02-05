@@ -1,7 +1,7 @@
 package com.example.dorak.ui.home
 
-import android.app.Service
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.dorak.R
 import com.example.dorak.databinding.GetTicketFragmentBinding
 import com.example.dorak.dataclass.ServicesResponse
 import com.example.dorak.network.GenericViewModelFactory
-import com.example.dorak.ui.login.services.GetAllServicesViewModel
+import com.example.dorak.viewmodels.GetAllServicesViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -23,7 +22,7 @@ class GetTicketFragment : Fragment() {
     private lateinit var binding : GetTicketFragmentBinding
     private lateinit var servicesViewModel : GetAllServicesViewModel
 
-    var currentQAdapter: ServiceAdapter? = null
+    private var serviceAdapter: ServiceAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,19 +60,21 @@ class GetTicketFragment : Fragment() {
     private fun observerGetAllServiceViewModel() {
         servicesViewModel.servicesResponse.observe(viewLifecycleOwner){servicesList->
             servicesListAdapter(servicesList)
-
+        }
+        servicesViewModel.errorResponse.observe(viewLifecycleOwner){
+            Log.v("service list error","service list error")
         }
 
     }
 
-    fun servicesListAdapter(servicesList: List<ServicesResponse?>) {
+    private fun servicesListAdapter(servicesList: List<ServicesResponse?>) {
 
-        currentQAdapter = ServiceAdapter(servicesList , onItemClick = {
+        serviceAdapter = ServiceAdapter(servicesList , onItemClick = {
               findNavController().navigate(GetTicketFragmentDirections.actionGetTicketToPaybill(it.Qid.toString()))
         })
 
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerView.adapter = currentQAdapter
+        binding.recyclerView.adapter = serviceAdapter
 
     }
 

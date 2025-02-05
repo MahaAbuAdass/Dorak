@@ -5,20 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.example.dorak.R
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.dorak.databinding.FragmentHomeBinding
-import com.example.dorak.network.GenericViewModelFactory
-import com.example.dorak.ui.home.BannerAdapter
-import com.example.dorak.ui.home.BannerPageTransformer
-import com.example.dorak.ui.login.LoginViewModel
-import com.example.dorak.ui.login.services.GetAllServicesViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 

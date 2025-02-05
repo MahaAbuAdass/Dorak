@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
-class LoginViewModel (context: Context) : ViewModel() {
+class LoginViewModel(context: Context) : ViewModel() {
 
     private val retrofitBuilder = RetrofitBuilder(context)
 
@@ -27,18 +27,13 @@ class LoginViewModel (context: Context) : ViewModel() {
 
     fun callLoginApi(userName: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            // Reset previous responses before calling API
-            _getLoginResponse.postValue(null)
-            _errorResponse.postValue(null)
-
             runCatching {
                 retrofitBuilder.login(userName, password) // Call API
             }.onSuccess { response ->
-                Log.d("LoginAPI", "Raw API response: $response")
-
-                // ✅ Check if the response follows the success structure
-                if (response != null && response.FullNameEn != null) {
+                Log.d("LoginAPI", "✅ Success response received: $response")
+                if (response.FullNameEn != null) {
                     _getLoginResponse.postValue(response) // ✅ Success case
+                    _errorResponse.postValue(null) // Reset error since login succeeded
                 } else {
                     _errorResponse.postValue(
                         LoginErrorResponse(
@@ -51,52 +46,30 @@ class LoginViewModel (context: Context) : ViewModel() {
                     )
                 }
             }.onFailure { exception ->
-                handleException(exception) // Handle errors
+                handleException(exception) // Handle API errors
             }
         }
     }
 
-
-
-
-
-
     private fun handleException(exception: Throwable) {
         when (exception) {
             is HttpException -> {
-                if (exception.code() == 404) {
-                    try {
-                        val errorBody = exception.response()?.errorBody()?.string()
-                        val errorResponse = Gson().fromJson(errorBody, LoginErrorResponse::class.java)
-                        _errorResponse.postValue(errorResponse) // ❌ Show error message from API
-                    } catch (ex: Exception) {
-                        _errorResponse.postValue(
-                            LoginErrorResponse("HTTP Error", 404, "User not found", "المستخدم غير موجود", null)
-                        )
-                    }
-                } else {
-                    handleHttpException(exception) // Handle other HTTP errors
+                val code = exception.code()
+                val errorMessage = exception.message()
+                val errorBody = exception.response()?.errorBody()?.string()
+                val errorResponse = try {
+                    Gson().fromJson(errorBody, LoginErrorResponse::class.java)
+                } catch (ex: Exception) {
+                    LoginErrorResponse("HTTP Error", code, errorMessage, "خطأ: $errorMessage", null)
                 }
+                _errorResponse.postValue(errorResponse) // ❌ Post error to LiveData
+                _getLoginResponse.postValue(null) // Reset success response on failure
             }
             is IOException -> _errorResponse.postValue(
                 LoginErrorResponse("Network Error", null, "No Internet Connection", "لا يوجد اتصال بالإنترنت", null)
             )
             else -> _errorResponse.postValue(
                 LoginErrorResponse("Unexpected Error", null, exception.message, exception.message, null)
-            )
-        }
-    }
-
-
-    private fun handleHttpException(e: HttpException) {
-        try {
-            val errorBody = e.response()?.errorBody()?.string()
-            val errorResponse = Gson().fromJson(errorBody, LoginErrorResponse::class.java)
-            _errorResponse.postValue(errorResponse)
-        } catch (ex: Exception) {
-            // Handle any other exceptions during error handling
-            _errorResponse.postValue(
-                LoginErrorResponse("HTTP Error", e.code(), "Error: ${e.message()}", "خطأ: ${e.message()}", null)
             )
         }
     }

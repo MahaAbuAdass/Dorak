@@ -1,4 +1,4 @@
-package com.example.dorak.ui.login.services
+package com.example.dorak.viewmodels
 
 import android.content.Context
 import androidx.lifecycle.LiveData
