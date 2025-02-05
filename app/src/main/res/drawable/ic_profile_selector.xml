@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Green icon for selected item -->
+    <item android:drawable="@drawable/profile_green" android:state_checked="true"/>
+    <!-- Grey icon for unselected item -->
+    <item android:drawable="@drawable/profile"/>
+</selector>

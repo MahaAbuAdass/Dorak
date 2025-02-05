@@ -29,6 +29,9 @@ class PayBillDetails : Fragment() {
         binding.btnGenerateTicket.setOnClickListener {
             findNavController().navigate(R.id.action_paybillDetails_to_ticketDetails)
         }
+        binding.imgBack.setOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
 
 
     }

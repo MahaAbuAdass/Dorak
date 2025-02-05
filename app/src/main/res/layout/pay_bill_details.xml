@@ -21,11 +21,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Irbid Mall Branch"
+        android:layout_marginStart="5dp"
         app:layout_constraintStart_toEndOf="@id/img_back"
         app:layout_constraintTop_toTopOf="@id/img_back"
         app:layout_constraintBottom_toBottomOf="@id/img_back"
         android:textColor="@color/text_grey"
-        android:textSize="16sp"
+        android:textSize="18sp"
 
          />
 
@@ -212,8 +213,11 @@
         android:text="Generate Ticket Now"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
+        android:textSize="18sp"
         android:layout_marginTop="20dp"
         android:id="@+id/btn_generate_ticket"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         />
 
 

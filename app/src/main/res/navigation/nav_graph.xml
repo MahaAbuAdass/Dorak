@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/loginScreen"
-        android:name="com.example.dorak.ui.LoginFragment"
+        android:name="com.example.dorak.ui.login.LoginFragment"
         tools:layout="@layout/login_fragment"
         android:label="SplashScreen"
         />

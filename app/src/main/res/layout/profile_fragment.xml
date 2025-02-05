@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/img_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/profile_img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Personal Info"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/img_profile"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="30dp"
+        android:textSize="18sp"
+        android:id="@+id/tv_personal"
+        />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:strokeColor="@color/light_grey"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:id="@+id/card_view_ticket_1"
+        app:layout_constraintTop_toBottomOf="@id/tv_personal"
+        android:layout_marginTop="10dp"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            >
+
+
+            <TextView
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="10dp"
+                android:textSize="16sp"
+                android:text="Your name"
+                android:id="@+id/tv_user"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/tv_user"
+                app:layout_constraintBottom_toBottomOf="@id/tv_user"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/text_light_grey"
+                android:textSize="16sp"
+                android:text="Maha Abu Adass"
+                android:id="@+id/tv_name"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tv_user"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_user"
+                android:layout_marginTop="20dp"
+                android:textSize="16sp"
+                android:text="Gender"
+                android:id="@+id/tv_type"
+                android:layout_marginBottom="15dp"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/tv_type"
+                app:layout_constraintBottom_toBottomOf="@id/tv_type"
+                app:layout_constraintEnd_toEndOf="@id/tv_name"
+                app:layout_constraintStart_toStartOf="@id/tv_name"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/text_light_grey"
+                android:textSize="16sp"
+                android:text="Female"
+                android:id="@+id/tv_gender"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contact Info"
+        app:layout_constraintTop_toBottomOf="@id/card_view_ticket_1"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="30dp"
+        android:textSize="18sp"
+        android:id="@+id/tv_contact_info"
+        android:textStyle="bold"
+
+        />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:strokeColor="@color/light_grey"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:id="@+id/card_view_contact_info"
+        app:layout_constraintTop_toBottomOf="@id/tv_contact_info"
+        android:layout_marginTop="10dp"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            >
+
+
+            <TextView
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="10dp"
+                android:textSize="16sp"
+                android:text="Phone number"
+                android:id="@+id/tv_phone_number"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/tv_phone_number"
+                app:layout_constraintBottom_toBottomOf="@id/tv_phone_number"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/text_light_grey"
+                android:textSize="16sp"
+                android:text="+962 77 500 9710"
+                android:id="@+id/tv_number"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tv_phone_number"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_phone_number"
+                android:layout_marginTop="20dp"
+                android:textSize="16sp"
+                android:text="Email"
+                android:id="@+id/tv_email"
+                android:layout_marginBottom="15dp"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/tv_email"
+                app:layout_constraintBottom_toBottomOf="@id/tv_email"
+                app:layout_constraintEnd_toEndOf="@id/tv_number"
+                app:layout_constraintStart_toStartOf="@id/tv_number"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/text_light_grey"
+                android:textSize="16sp"
+                android:text="test@mail.com"
+                android:id="@+id/tv_useremail"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+<Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/btn_edit"
+    app:layout_constraintTop_toBottomOf="@id/card_view_contact_info"
+    android:layout_marginTop="40dp"
+    android:layout_marginStart="40dp"
+    android:layout_marginEnd="40dp"
+    android:text="Edit"
+    android:textSize="20sp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,6 +30,9 @@ class TicketDetails :Fragment() {
             findNavController().navigate(R.id.action_ticketDetails_to_myTicketFragment)
         }
 
+        binding.imgBack.setOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
 
     }
 }

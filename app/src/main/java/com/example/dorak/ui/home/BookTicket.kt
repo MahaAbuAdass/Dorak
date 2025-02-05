@@ -29,6 +29,9 @@ class BookTicket :Fragment() {
             findNavController().navigate(R.id.action_bookTicketFragment_to_serviceDetailsFragment)
 
         }
+        binding.imgBack.setOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
     }
 
 }

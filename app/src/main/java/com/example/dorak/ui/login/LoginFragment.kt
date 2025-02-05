@@ -1,4 +1,4 @@
-package com.example.dorak.ui
+package com.example.dorak.ui.login
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -18,13 +18,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.dorak.R
 import com.example.dorak.databinding.LoginFragmentBinding
+import com.example.dorak.network.GenericViewModelFactory
+import com.example.dorak.ui.HomeActivity
+import com.example.dorak.util.PreferenceManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
 
@@ -32,6 +37,10 @@ class LoginFragment : Fragment() {
     private lateinit var etMobile: EditText
     private lateinit var etPassword: EditText
     private var dialog: Dialog? = null
+    var mobileNumber: String? = null
+    var password: String? = null
+
+    private lateinit var loginViewModel : LoginViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,6 +54,12 @@ class LoginFragment : Fragment() {
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val getLoginFactory = GenericViewModelFactory(LoginViewModel::class) {
+            LoginViewModel(requireContext())
+        }
+
+        loginViewModel = ViewModelProvider(this, getLoginFactory).get(LoginViewModel::class.java)
 
         etMobile = binding.etMobile
         etPassword = binding.etPassword
@@ -76,15 +91,47 @@ class LoginFragment : Fragment() {
                 binding.etPasswordError.visibility = View.VISIBLE
                 isValid = false
             }
-
-            // If both fields are valid, show the popup
+                        // If both fields are valid, show the popup
             if (isValid) {
-                showPopup()
+                mobileNumber = binding.etMobile.text.toString()
+                password = binding.etPassword.text.toString()
+
+                PreferenceManager.saveUsernameAndPassword(requireContext(), mobileNumber ?:"",password ?:"",true)
+
+                callLoginApi()
+                observerLoginApiViewModel()
+            }
+        }
+    }
+
+    private fun observerLoginApiViewModel() {
+        loginViewModel.getLoginResponse.observe(viewLifecycleOwner) { response ->
+            if (response != null) {
+                Log.d("LoginObserver", "✅ Success response received: $response")
+                showPopup()  // Show success popup
             }
         }
 
+        loginViewModel.errorResponse.observe(viewLifecycleOwner) { error ->
+            if (error != null && loginViewModel.getLoginResponse.value == null) {
+                Log.e("LoginObserver", "❌ Error response received: ${error.messageEn}")
+                val message = error.messageEn ?: "An unexpected error occurred"
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 
 
+
+
+
+
+
+
+    private fun callLoginApi() {
+        viewLifecycleOwner.lifecycleScope.launch (Dispatchers.IO){
+            loginViewModel.callLoginApi(mobileNumber?:"",password?:"")
+        }
     }
 
     private fun showPopup() {

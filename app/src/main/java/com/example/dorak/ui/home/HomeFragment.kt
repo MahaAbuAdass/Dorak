@@ -5,19 +5,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.dorak.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.dorak.databinding.FragmentHomeBinding
+import com.example.dorak.network.GenericViewModelFactory
 import com.example.dorak.ui.home.BannerAdapter
 import com.example.dorak.ui.home.BannerPageTransformer
+import com.example.dorak.ui.login.LoginViewModel
+import com.example.dorak.ui.login.services.GetAllServicesViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
-    private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var binding : FragmentHomeBinding
     private lateinit var viewPager: ViewPager2
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,8 +38,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Initialize BottomNavigationView
-      //  bottomNavigationView = view.findViewById(R.id.bottomNavigationView)
 
 
         viewPager = view.findViewById(R.id.bannerViewPager)
@@ -76,6 +81,7 @@ class HomeFragment : Fragment() {
 
 
     }
+
 
 
 

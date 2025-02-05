@@ -23,9 +23,10 @@
         app:layout_constraintTop_toTopOf="@id/img_back"
         app:layout_constraintBottom_toBottomOf="@id/img_back"
         android:textColor="@color/text_grey"
-        android:textSize="16sp"
+        android:textSize="18sp"
+        android:layout_marginStart="5dp"
 
-        android:textStyle="bold" />
+        />
 
     <TextView
         android:id="@+id/select_service"
@@ -53,6 +54,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:padding="5dp"
             >
 
             <TextView

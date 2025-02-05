@@ -19,13 +19,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Pay Bill"
+        android:layout_marginStart="5dp"
         app:layout_constraintStart_toEndOf="@id/img_back"
         app:layout_constraintTop_toTopOf="@id/img_back"
         app:layout_constraintBottom_toBottomOf="@id/img_back"
         android:textColor="@color/text_grey"
-        android:textSize="16sp"
-
-        android:textStyle="bold" />
+        android:textSize="18sp"
+        />
 
     <TextView
         android:id="@+id/select_service"
@@ -52,6 +52,7 @@
         >
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
+            android:padding="5dp"
             android:layout_height="match_parent"
             >
 
