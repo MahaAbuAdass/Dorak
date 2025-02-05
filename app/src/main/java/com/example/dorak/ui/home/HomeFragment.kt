@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.dorak.R
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.example.dorak.databinding.FragmentHomeBinding
+import com.example.dorak.util.PreferenceManager
 
 class HomeFragment : Fragment() {
 
@@ -28,7 +30,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        val username = PreferenceManager.getUsername(requireContext())
+        binding.name.text = username
 
         viewPager = view.findViewById(R.id.bannerViewPager)
 

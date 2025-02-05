@@ -69,7 +69,6 @@
                 android:layout_marginStart="10dp"
                 android:textColor="@color/text_light_grey"
                 android:textSize="16sp"
-                android:text="Maha Abu Adass"
                 android:id="@+id/tv_name"
                 />
 
@@ -97,7 +96,6 @@
                 android:layout_marginStart="10dp"
                 android:textColor="@color/text_light_grey"
                 android:textSize="16sp"
-                android:text="Female"
                 android:id="@+id/tv_gender"
                 />
 

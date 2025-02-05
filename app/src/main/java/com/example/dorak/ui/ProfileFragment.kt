@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.dorak.databinding.ProfileFragmentBinding
+import com.example.dorak.util.PreferenceManager
 
 class ProfileFragment : Fragment() {
 
@@ -22,5 +23,14 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val username = PreferenceManager.getUsername(requireContext())
+        val gender = PreferenceManager.getGender(requireContext())
+        val mobile = PreferenceManager.getMobile(requireContext())
+        binding.tvName.text = username
+        binding.tvGender.text = gender
+        binding.tvNumber.text = mobile
+
+
     }
 }

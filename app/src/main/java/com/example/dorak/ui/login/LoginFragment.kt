@@ -96,8 +96,6 @@ class LoginFragment : Fragment() {
                 mobileNumber = binding.etMobile.text.toString()
                 password = binding.etPassword.text.toString()
 
-                PreferenceManager.saveUsernameAndPassword(requireContext(), mobileNumber ?:"",password ?:"",true)
-
                 callLoginApi()
                 observerLoginApiViewModel()
             }
@@ -107,6 +105,13 @@ class LoginFragment : Fragment() {
     private fun observerLoginApiViewModel() {
         loginViewModel.getLoginResponse.observe(viewLifecycleOwner) { response ->
             if (response != null) {
+                val userName = response.FullNameEn
+                val gender = response.Sex
+                PreferenceManager.saveMobileAndPassword(requireContext(),
+                    mobileNumber ?:"",password ?:"",true)
+
+                PreferenceManager.saveUserInfo(requireContext(), userName ?:"","",gender ?:"" )
+
                 Log.d("LoginObserver", "✅ Success response received: $response")
             //    Toast.makeText(requireContext(), "Login Successful", Toast.LENGTH_SHORT).show()
                 showPopup()  // Show success popup
