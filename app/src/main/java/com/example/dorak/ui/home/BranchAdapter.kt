@@ -34,10 +34,22 @@ class BranchAdapter  (
         return branchesList.size
     }
 
+    fun getTopBranch(): BranchResponse? {
+        return branchesList.firstOrNull()
+    }
+
+
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
 
         val item = branchesList[position]
         holder.branchName.text = item?.BranchNameEn
+
+        holder.itemView.setOnClickListener {
+            item?.let {
+                holder.bind(it)  // Calls the bind function, setting text and click listener
+            }
+        }
+
 
     }
 }

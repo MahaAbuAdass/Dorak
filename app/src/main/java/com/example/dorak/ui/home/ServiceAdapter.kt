@@ -40,6 +40,12 @@ class ServiceAdapter (
         holder.serviceName.text = item?.QNameEn
 
 
+        holder.itemView.setOnClickListener {
+            item?.let {
+                holder.bind(it)  // Calls the bind function, setting text and click listener
+            }
+        }
+
 
     }
 

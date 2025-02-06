@@ -70,6 +70,9 @@
             <action
                 android:id="@+id/action_paybillDetails_to_ticketDetails"
                 app:destination="@id/ticketDetails" />
+            <argument
+                android:name="location"
+                app:argType="string" />
         </fragment>
         <fragment
             android:id="@+id/ticketDetails"

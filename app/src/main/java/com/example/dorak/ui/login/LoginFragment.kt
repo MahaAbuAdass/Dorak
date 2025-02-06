@@ -107,6 +107,7 @@ class LoginFragment : Fragment() {
             if (response != null) {
                 val userName = response.FullNameEn
                 val gender = response.Sex
+
                 PreferenceManager.saveMobileAndPassword(requireContext(),
                     mobileNumber ?:"",password ?:"",true)
 

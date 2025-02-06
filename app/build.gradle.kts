@@ -57,7 +57,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
     implementation ("androidx.cardview:cardview:1.0.0")
     implementation ("androidx.viewpager2:viewpager2:1.0.0")
-    implementation ("com.google.android.material:material:1.12.0") // or the latest version
+    implementation ("com.google.android.material:material:1.12.0")
 
         implementation ("androidx.fragment:fragment-ktx:1.5.1")
 
@@ -70,5 +70,8 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation ("com.github.bumptech.glide:glide:4.15.1")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.15.1")
+    implementation("com.mapbox.maps:android:11.9.2")
+
+//    implementation ("com.mapbox.mapboxsdk:mapbox-android-sdk:8.12.1")
 
 }

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Dorak</string>
+    <string name="mapbox_access_token">pk.eyJ1IjoiYWJ1YWRhc3MiLCJhIjoiY202dDU4NGkwMGZobDJscDhmanZ2NHNlYyJ9.k-DVEg92UGvaas_g20p5PQ</string>
+
 </resources>

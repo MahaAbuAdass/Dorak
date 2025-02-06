@@ -61,6 +61,11 @@ class PayBillFragment : Fragment() {
     private fun observerGetAllBranchesViewModel() {
         branchesViewModel.branchesResponse.observe(viewLifecycleOwner){branchesList->
             branchesListAdapter(branchesList)
+            val location = branchAdapter?.getTopBranch()?.BranchNameEn
+            binding.nearestBranch.text = location
+            binding.nearestBranch.setOnClickListener {
+                findNavController().navigate(PayBillFragmentDirections.actionPaybillToPaybillDetails(location?:""))
+            }
         }
         branchesViewModel.errorResponse.observe(viewLifecycleOwner){
             Log.v("branch list error", "branch list error")
@@ -69,7 +74,7 @@ class PayBillFragment : Fragment() {
 
     private fun branchesListAdapter(branchList : List<BranchResponse>){
         branchAdapter = BranchAdapter(branchList , onItemClick = {
-            findNavController().navigate(R.id.action_paybill_to_paybillDetails)
+            findNavController().navigate(PayBillFragmentDirections.actionPaybillToPaybillDetails(it.BranchNameEn?:""))
         })
 
         binding.branchRecyclerView.layoutManager = LinearLayoutManager(requireContext())
