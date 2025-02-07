@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.dorak.R
 import com.example.dorak.databinding.PayBillDetailsBinding
+import com.example.dorak.util.PreferenceManager
 import com.mapbox.geojson.Point
 import com.mapbox.maps.CameraOptions
 import com.mapbox.maps.MapView
@@ -71,6 +72,9 @@ class PayBillDetails : Fragment() {
         binding.title.text = args.location
         binding.details.text = args.location
         binding.address.text = args.location
+
+        val phone = PreferenceManager.getMobile(requireContext())
+        binding.phone.text = phone
 
         binding.btnGenerateTicket.setOnClickListener {
             findNavController().navigate(R.id.action_paybillDetails_to_ticketDetails)

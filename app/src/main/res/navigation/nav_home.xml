@@ -93,17 +93,33 @@
 
     <fragment
         android:id="@+id/bookTicketFragment"
-        android:name="com.example.dorak.ui.home.BookTicket"
+        android:name="com.example.dorak.ui.home.bookticket.BookTicket"
         tools:layout="@layout/book_ticket_fragment"
         >
         <action
-            android:id="@+id/action_bookTicketFragment_to_serviceDetailsFragment"
-            app:destination="@id/serviceDetailsFragment" />
+            android:id="@+id/action_bookTicketFragment_to_payBillBookTicketFragment"
+            app:destination="@id/payBillBookTicketFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/payBillBookTicketFragment"
+        android:name="com.example.dorak.ui.home.bookticket.PayBillBookTicket"
+        tools:layout="@layout/pay_bill_book_ticket"
+        >
+        <argument
+            android:name="qid"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_payBillBookTicketFragment_to_bookTicketDetailstFragment"
+            app:destination="@id/bookTicketDetailstFragment" />
+
+
     </fragment>
 
+
     <fragment
-        android:id="@+id/serviceDetailsFragment"
-        android:name="com.example.dorak.ui.home.ServiceDetailsFragment"
-        tools:layout="@layout/service_details_fragment"
+        android:id="@+id/bookTicketDetailstFragment"
+        android:name="com.example.dorak.ui.home.bookticket.BookTicketDetailsFragment"
+        tools:layout="@layout/book_ticket_details_fragment"
         />
+
 </navigation>

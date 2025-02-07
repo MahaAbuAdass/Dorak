@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/back"
+        android:layout_margin="20dp"
+        android:id="@+id/img_back"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pay Bill"
+        android:layout_marginStart="5dp"
+        app:layout_constraintStart_toEndOf="@id/img_back"
+        app:layout_constraintTop_toTopOf="@id/img_back"
+        app:layout_constraintBottom_toBottomOf="@id/img_back"
+        android:textColor="@color/text_grey"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/select_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your nearest suggested branch"
+        app:layout_constraintTop_toBottomOf="@id/img_back"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="20dp"
+        android:textColor="@color/text_grey"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:strokeColor="@color/green"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:id="@+id/card_view_ticket_1"
+        app:layout_constraintTop_toBottomOf="@id/select_service"
+        android:layout_marginTop="10dp"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:padding="5dp"
+            android:layout_height="match_parent"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="10dp"
+                android:textSize="14sp"
+                android:textColor="@color/text_grey"
+                android:text="Nearest Branch"
+                android:id="@+id/tv_branch"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tv_branch"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="14sp"
+                android:textColor="@color/text_grey"
+                android:text="Irbid Mall Branch"
+                android:id="@+id/nearest_branch"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:id="@+id/spacer"
+                app:layout_constraintTop_toBottomOf="@id/nearest_branch"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/grey_arrow"
+                android:id="@+id/img_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="15dp"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/select_branch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Or select branch"
+        app:layout_constraintTop_toBottomOf="@id/card_view_ticket_1"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="20dp"
+        android:textColor="@color/text_grey"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/branch_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/select_branch"
+        android:layout_margin="5dp"
+        android:paddingBottom="30dp"
+
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
