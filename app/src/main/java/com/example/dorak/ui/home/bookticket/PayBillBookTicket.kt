@@ -54,7 +54,8 @@ class PayBillBookTicket :Fragment() {
 
         binding.cardViewTicket1.setOnClickListener {
             val location = branchAdapter?.getTopBranch()?.BranchNameEn
-            findNavController().navigate(PayBillBookTicketDirections.actionPayBillBookTicketFragmentToBookTicketDetailstFragment(location?:""))
+            val branchCode = branchAdapter?.getTopBranch()?.BranchCode.toString()
+            findNavController().navigate(PayBillBookTicketDirections.actionPayBillBookTicketFragmentToBookTicketDetailstFragment(location?:"",branchCode?:""))
         }
 
         binding.imgBack.setOnClickListener {
@@ -63,22 +64,28 @@ class PayBillBookTicket :Fragment() {
     }
 
     private fun observerGetAllBranchesViewModel() {
-        branchesViewModel.branchesResponse.observe(viewLifecycleOwner){branchesList->
+        branchesViewModel.branchesResponse.observe(viewLifecycleOwner) { branchesList ->
             branchesListAdapter(branchesList)
             val location = branchAdapter?.getTopBranch()?.BranchNameEn
+            val branchCode = branchAdapter?.getTopBranch()?.BranchCode.toString()
             binding.nearestBranch.text = location
             binding.nearestBranch.setOnClickListener {
-                findNavController().navigate(PayBillBookTicketDirections.actionPayBillBookTicketFragmentToBookTicketDetailstFragment(location?:""))
+                findNavController().navigate(
+                    PayBillBookTicketDirections.actionPayBillBookTicketFragmentToBookTicketDetailstFragment(
+                        location ?: "",
+                        branchCode ?: ""
+                    )
+                )
             }
-        }
-        branchesViewModel.errorResponse.observe(viewLifecycleOwner){
-            Log.v("branch list error", "branch list error")
+            branchesViewModel.errorResponse.observe(viewLifecycleOwner) {
+                Log.v("branch list error", "branch list error")
+            }
         }
     }
 
     private fun branchesListAdapter(branchList : List<BranchResponse>){
         branchAdapter = BranchAdapter(branchList , onItemClick = {
-            findNavController().navigate(PayBillBookTicketDirections.actionPayBillBookTicketFragmentToBookTicketDetailstFragment(it.BranchNameEn?:""))
+            findNavController().navigate(PayBillBookTicketDirections.actionPayBillBookTicketFragmentToBookTicketDetailstFragment(it.BranchNameEn?:"",it.BranchCode.toString()?:""))
         })
 
         binding.branchRecyclerView.layoutManager = LinearLayoutManager(requireContext())

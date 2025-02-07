@@ -2,6 +2,7 @@ package com.example.dorak.network
 
 
 
+import com.example.dorak.dataclass.AvailableTimeReponse
 import com.example.dorak.dataclass.BranchResponse
 import com.example.dorak.dataclass.LoginSucessResponse
 import com.example.dorak.dataclass.ServicesResponse
@@ -25,5 +26,11 @@ interface ApiService {
     suspend fun getBranchResopnse(
         @Query("QID") QID: String,
     ): List<BranchResponse>
+
+    @GET("api/App_GetAvailableTimeApp")
+    suspend fun getAvailableTime(
+        @Query("BranchCode") BranchCode: String,
+    ): List<AvailableTimeReponse>
+
 
 }

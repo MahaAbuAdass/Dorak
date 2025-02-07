@@ -13,17 +13,28 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import com.example.dorak.R
 import com.example.dorak.databinding.BookTicketDetailsFragmentBinding
+import com.example.dorak.network.GenericViewModelFactory
+import com.example.dorak.viewmodels.GetAvailableTimeViewModel
+import com.example.dorak.viewmodels.GetBranchesViewModel
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class BookTicketDetailsFragment : Fragment() {
 
     private lateinit var binding: BookTicketDetailsFragmentBinding
     private lateinit var calendarView: MaterialCalendarView
+    private lateinit var getAvailableTimeViewModel: GetAvailableTimeViewModel
+
+    private val args: BookTicketDetailsFragmentArgs by navArgs()
 
     // List of enabled dates
     private val enabledDates = hashSetOf(
@@ -48,6 +59,13 @@ class BookTicketDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val getTimeFactory = GenericViewModelFactory(GetAvailableTimeViewModel::class) {
+            GetAvailableTimeViewModel(requireContext())
+        }
+
+        getAvailableTimeViewModel = ViewModelProvider(this, getTimeFactory).get(GetAvailableTimeViewModel::class.java)
+
+        binding.title.text = args.location
         calendarView = binding.calendarView
 
         // Disable the default selection color
@@ -78,6 +96,19 @@ class BookTicketDetailsFragment : Fragment() {
                 }
                 showPopup(date)
             }
+        }
+
+        callGetAvailableTimeApi()
+        observerGetAvailableTimeViewModel()
+    }
+
+    private fun observerGetAvailableTimeViewModel() {
+    }
+
+    private fun callGetAvailableTimeApi() {
+        val branchCode = args.branchCode
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO){
+            getAvailableTimeViewModel.getAvailableTime(branchCode?:"")
         }
     }
 

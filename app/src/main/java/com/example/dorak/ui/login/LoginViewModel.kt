@@ -15,62 +15,71 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
+// Sealed class to represent login response states
+sealed class LoginResponse {
+    data class Success(val data: LoginSucessResponse) : LoginResponse()
+    data class Error(val message: String, val code: Int? = null) : LoginResponse()
+}
+
 class LoginViewModel(context: Context) : ViewModel() {
 
     private val retrofitBuilder = RetrofitBuilder(context)
 
-    private val _getLoginResponse = MutableLiveData<LoginSucessResponse?>()
-    val getLoginResponse: LiveData<LoginSucessResponse?> = _getLoginResponse
+    // Single LiveData for login response
+    private val _loginResponse = MutableLiveData<LoginResponse?>()
+    val loginResponse: LiveData<LoginResponse?> = _loginResponse
 
-    private val _errorResponse = MutableLiveData<LoginErrorResponse?>()
-    val errorResponse: LiveData<LoginErrorResponse?> = _errorResponse
+    // Flag to track if an API call is in progress
+    private var isLoginInProgress = false
 
     fun callLoginApi(userName: String, password: String) {
+        if (isLoginInProgress) {
+            return // Prevent multiple API calls
+        }
+
+        isLoginInProgress = true // Set flag to indicate API call is in progress
+
         viewModelScope.launch(Dispatchers.IO) {
             runCatching {
                 retrofitBuilder.login(userName, password) // Call API
             }.onSuccess { response ->
                 Log.d("LoginAPI", "✅ Success response received: $response")
                 if (response.FullNameEn != null) {
-                    _getLoginResponse.postValue(response) // ✅ Success case
-                    _errorResponse.postValue(null) // Reset error since login succeeded
+                    _loginResponse.postValue(LoginResponse.Success(response)) // ✅ Success case
                 } else {
-                    _errorResponse.postValue(
-                        LoginErrorResponse(
-                            "Invalid Data",
-                            400,
-                            "Invalid credentials",
-                            "بيانات غير صالحة",
-                            null
-                        )
+                    _loginResponse.postValue(
+                        LoginResponse.Error("Invalid credentials", 400) // ❌ Error case
                     )
                 }
             }.onFailure { exception ->
                 handleException(exception) // Handle API errors
+            }.also {
+                isLoginInProgress = false // Reset flag after API call completes
             }
         }
     }
 
     private fun handleException(exception: Throwable) {
-        when (exception) {
+        val errorResponse = when (exception) {
             is HttpException -> {
                 val code = exception.code()
                 val errorMessage = exception.message()
                 val errorBody = exception.response()?.errorBody()?.string()
-                val errorResponse = try {
-                    Gson().fromJson(errorBody, LoginErrorResponse::class.java)
+                try {
+                    val error = Gson().fromJson(errorBody, LoginErrorResponse::class.java)
+                    LoginResponse.Error(error.messageEn ?: "HTTP Error", code)
                 } catch (ex: Exception) {
-                    LoginErrorResponse("HTTP Error", code, errorMessage, "خطأ: $errorMessage", null)
+                    LoginResponse.Error("HTTP Error: $errorMessage", code)
                 }
-                _errorResponse.postValue(errorResponse) // ❌ Post error to LiveData
-                _getLoginResponse.postValue(null) // Reset success response on failure
             }
-            is IOException -> _errorResponse.postValue(
-                LoginErrorResponse("Network Error", null, "No Internet Connection", "لا يوجد اتصال بالإنترنت", null)
-            )
-            else -> _errorResponse.postValue(
-                LoginErrorResponse("Unexpected Error", null, exception.message, exception.message, null)
-            )
+            is IOException -> LoginResponse.Error("No Internet Connection")
+            else -> LoginResponse.Error(exception.message ?: "Unexpected Error")
         }
+        _loginResponse.postValue(errorResponse) // ❌ Post error to LiveData
+    }
+
+    // Reset LiveData after handling the response
+    fun resetLoginResponse() {
+        _loginResponse.value = null
     }
 }

@@ -26,6 +26,8 @@ class RetrofitBuilder(context: Context) {
     suspend fun getServices()=apiService.getAllServicesApi()
     suspend fun getBranches(qId: String)=apiService.getBranchResopnse(qId)
 
+    suspend fun getAvailableTime(branchCode : String) = apiService.getAvailableTime(branchCode)
+
 }
 
 

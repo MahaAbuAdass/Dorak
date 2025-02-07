@@ -41,6 +41,7 @@ class LoginFragment : Fragment() {
     var password: String? = null
 
     private lateinit var loginViewModel : LoginViewModel
+    private var isLoginInProgress = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -95,6 +96,7 @@ class LoginFragment : Fragment() {
             if (isValid) {
                 mobileNumber = binding.etMobile.text.toString()
                 password = binding.etPassword.text.toString()
+                isLoginInProgress = true // Set flag to indicate login is in progress
 
                 callLoginApi()
                 observerLoginApiViewModel()
@@ -103,30 +105,53 @@ class LoginFragment : Fragment() {
     }
 
     private fun observerLoginApiViewModel() {
-        loginViewModel.getLoginResponse.observe(viewLifecycleOwner) { response ->
-            if (response != null) {
-                val userName = response.FullNameEn
-                val gender = response.Sex
+        loginViewModel.loginResponse.observe(viewLifecycleOwner) { response ->
+            isLoginInProgress = false // Reset flag after handling response
 
-                PreferenceManager.saveMobileAndPassword(requireContext(),
-                    mobileNumber ?:"",password ?:"",true)
+            when (response) {
+                is LoginResponse.Success -> {
+                    // Handle successful login
+                    val userName = response.data.FullNameEn
+                    val gender = response.data.Sex
 
-                PreferenceManager.saveUserInfo(requireContext(), userName ?:"","",gender ?:"" )
+                    PreferenceManager.saveMobileAndPassword(
+                        requireContext(),
+                        mobileNumber ?: "",
+                        password ?: "",
+                        true
+                    )
 
-                Log.d("LoginObserver", "✅ Success response received: $response")
-            //    Toast.makeText(requireContext(), "Login Successful", Toast.LENGTH_SHORT).show()
-                showPopup()  // Show success popup
-            }
-        }
+                    PreferenceManager.saveUserInfo(
+                        requireContext(),
+                        userName ?: "",
+                        "",
+                        gender ?: ""
+                    )
 
-        loginViewModel.errorResponse.observe(viewLifecycleOwner) { error ->
-            if (error != null) {
-                Log.e("LoginObserver", "❌ Error response received: ${error.messageEn}")
-                Toast.makeText(requireContext(), error.messageEn ?: "An unexpected error occurred", Toast.LENGTH_SHORT).show()
+                    Log.d("LoginObserver", "✅ Success response received: ${response.data}")
+                    showPopup()  // Show success popup
+
+                    // Reset LiveData after handling
+                    loginViewModel.resetLoginResponse()
+                }
+                is LoginResponse.Error -> {
+                    // Handle login error
+                    Log.e("LoginObserver", "❌ Error response received: ${response.message}")
+                    Toast.makeText(
+                        requireContext(),
+                        response.message ?: "An unexpected error occurred",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    // Reset LiveData after handling
+                    loginViewModel.resetLoginResponse()
+                }
+                null -> {
+                    // No response (reset state)
+                }
             }
         }
     }
-
 
     private fun callLoginApi() {
         viewLifecycleOwner.lifecycleScope.launch (Dispatchers.IO){

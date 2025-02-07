@@ -124,6 +124,9 @@
         <argument
             android:name="location"
             app:argType="string" />
+        <argument
+            android:name="branchCode"
+            app:argType="string" />
     </fragment>
 
 </navigation>

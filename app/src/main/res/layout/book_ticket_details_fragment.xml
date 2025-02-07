@@ -29,18 +29,39 @@
         android:textSize="18sp"
         />
 
-    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-        android:id="@+id/calendarView"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/calender_card_view"
         app:layout_constraintTop_toBottomOf="@id/img_back"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:strokeColor="@color/light_grey"
+        >
+
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/img_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"
+            />
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/calender_card_view"
+        android:text="Pick time"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
+        android:layout_margin="10dp"
+        android:textColor="@color/grey"
+        android:textSize="14dp"
         />
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
