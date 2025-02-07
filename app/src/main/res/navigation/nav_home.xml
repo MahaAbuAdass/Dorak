@@ -120,6 +120,10 @@
         android:id="@+id/bookTicketDetailstFragment"
         android:name="com.example.dorak.ui.home.bookticket.BookTicketDetailsFragment"
         tools:layout="@layout/book_ticket_details_fragment"
-        />
+        >
+        <argument
+            android:name="location"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

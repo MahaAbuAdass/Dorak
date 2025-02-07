@@ -29,7 +29,7 @@ class PayBillBookTicket :Fragment() {
     private lateinit var branchesViewModel: GetBranchesViewModel
     var branchAdapter: BranchAdapter? = null
 
-    private val args: PayBillFragmentArgs by navArgs()
+    private val args: PayBillBookTicketArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,7 +53,8 @@ class PayBillBookTicket :Fragment() {
         observerGetAllBranchesViewModel()
 
         binding.cardViewTicket1.setOnClickListener {
-            findNavController().navigate(R.id.action_paybill_to_paybillDetails)
+            val location = branchAdapter?.getTopBranch()?.BranchNameEn
+            findNavController().navigate(PayBillBookTicketDirections.actionPayBillBookTicketFragmentToBookTicketDetailstFragment(location?:""))
         }
 
         binding.imgBack.setOnClickListener {
@@ -67,7 +68,7 @@ class PayBillBookTicket :Fragment() {
             val location = branchAdapter?.getTopBranch()?.BranchNameEn
             binding.nearestBranch.text = location
             binding.nearestBranch.setOnClickListener {
-                findNavController().navigate(PayBillFragmentDirections.actionPaybillToPaybillDetails(location?:""))
+                findNavController().navigate(PayBillBookTicketDirections.actionPayBillBookTicketFragmentToBookTicketDetailstFragment(location?:""))
             }
         }
         branchesViewModel.errorResponse.observe(viewLifecycleOwner){
@@ -77,7 +78,7 @@ class PayBillBookTicket :Fragment() {
 
     private fun branchesListAdapter(branchList : List<BranchResponse>){
         branchAdapter = BranchAdapter(branchList , onItemClick = {
-            findNavController().navigate(PayBillBookTicketDirections.actionPayBillBookTicketFragmentToBookTicketDetailstFragment())
+            findNavController().navigate(PayBillBookTicketDirections.actionPayBillBookTicketFragmentToBookTicketDetailstFragment(it.BranchNameEn?:""))
         })
 
         binding.branchRecyclerView.layoutManager = LinearLayoutManager(requireContext())
