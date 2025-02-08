@@ -9,7 +9,9 @@ import kotlinx.serialization.SerialName
 data class LoginSucessResponse(
     @SerialName("FullNameAr" ) var FullNameAr : String? = null,
     @SerialName("FullNameEn" ) var FullNameEn : String? = null,
-    @SerialName("Sex"        ) var Sex        : String? = null
+    @SerialName("Sex"        ) var Sex        : String? = null,
+    @SerialName("ID"        ) var ID        : String? = null
+
 
 ): Parcelable
 

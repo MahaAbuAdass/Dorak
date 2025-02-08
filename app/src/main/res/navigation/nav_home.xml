@@ -59,6 +59,12 @@
             <argument
                 android:name="qid"
                 app:argType="string" />
+            <argument
+                android:name="service_en"
+                app:argType="string" />
+            <argument
+                android:name="service_ar"
+                app:argType="string" />
         </fragment>
 
         <fragment
@@ -73,6 +79,20 @@
             <argument
                 android:name="location"
                 app:argType="string" />
+            <argument
+                android:name="qid"
+                app:argType="string" />
+            <argument
+                android:name="branchCode"
+                app:argType="string" />
+            <argument
+                android:name="service_en"
+                app:argType="string" />
+            <argument
+                android:name="service_ar"
+                app:argType="string" />
+
+
         </fragment>
         <fragment
             android:id="@+id/ticketDetails"
@@ -83,6 +103,18 @@
             <action
                 android:id="@+id/action_ticketDetails_to_myTicketFragment"
                 app:destination="@id/myTicketFragment" />
+            <argument
+                android:name="qid"
+                app:argType="string" />
+            <argument
+                android:name="branchCode"
+                app:argType="string" />
+            <argument
+                android:name="service_en"
+                app:argType="string" />
+            <argument
+                android:name="service_ar"
+                app:argType="string" />
         </fragment>
 
         <fragment

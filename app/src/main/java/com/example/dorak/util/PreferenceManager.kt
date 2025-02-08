@@ -12,6 +12,8 @@ object PreferenceManager {
     private const val KEY_PASSWORD = "password"
     private const val KEY_GENDER = "gender"
 
+    private const val KEY_USER_ID = "user_id"
+
     private const val KEY_IS_SAVED_ANY_USER = "is_Added_user"
 
     private fun getPreferences(context: Context): SharedPreferences {
@@ -26,11 +28,12 @@ object PreferenceManager {
         editor.apply()
     }
 
-    fun saveUserInfo(context: Context, userName: String, email:String, gender:String) {
+    fun saveUserInfo(context: Context, userName: String, email:String, gender:String,userId : String) {
         val editor = getPreferences(context).edit()
         editor.putString(KEY_NAME, userName)
         editor.putString(KEY_EMAIL, email)
         editor.putString(KEY_GENDER, gender)
+        editor.putString(KEY_USER_ID, userId)
         editor.apply()
     }
 
@@ -43,6 +46,10 @@ object PreferenceManager {
 
     fun getMobile(context: Context): String? {
         return getPreferences(context).getString(KEY_MOBILE, "")
+    }
+
+    fun getUserId (context: Context): String? {
+        return getPreferences(context).getString(KEY_USER_ID, "")
     }
 
     fun getPassword(context: Context): String? {
@@ -67,6 +74,7 @@ object PreferenceManager {
         editor.remove(KEY_GENDER)
         editor.remove(KEY_EMAIL)
         editor.remove(KEY_NAME)
+        editor.remove(KEY_USER_ID)
         editor.apply()
         editor.commit()
     }

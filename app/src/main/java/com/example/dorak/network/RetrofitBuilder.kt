@@ -27,6 +27,9 @@ class RetrofitBuilder(context: Context) {
     suspend fun getBranches(qId: String)=apiService.getBranchResopnse(qId)
 
     suspend fun getAvailableTime(branchCode : String) = apiService.getAvailableTime(branchCode)
+    suspend fun getTimeSlots(apptDate: String, branchCode: String,sID: String)=apiService.getTimeSlot(apptDate,branchCode,sID)
+
+    suspend fun generateTicket(qID: String,branchCode: String,login_User_ID: String)=apiService.generateTicket(qID,branchCode,login_User_ID)
 
 }
 

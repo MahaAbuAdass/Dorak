@@ -70,7 +70,7 @@ class GetTicketFragment : Fragment() {
     private fun servicesListAdapter(servicesList: List<ServicesResponse?>) {
 
         serviceAdapter = ServiceAdapter(servicesList , onItemClick = {
-              findNavController().navigate(GetTicketFragmentDirections.actionGetTicketToPaybill(it.Qid.toString()))
+              findNavController().navigate(GetTicketFragmentDirections.actionGetTicketToPaybill(it.Qid.toString(),it.QNameEn?:"",it.QNameAr?:""))
         })
 
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())

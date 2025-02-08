@@ -113,6 +113,8 @@ class LoginFragment : Fragment() {
                     // Handle successful login
                     val userName = response.data.FullNameEn
                     val gender = response.data.Sex
+                    val userId = response.data.ID
+
 
                     PreferenceManager.saveMobileAndPassword(
                         requireContext(),
@@ -125,7 +127,8 @@ class LoginFragment : Fragment() {
                         requireContext(),
                         userName ?: "",
                         "",
-                        gender ?: ""
+                        gender ?: "",
+                        userId?:""
                     )
 
                     Log.d("LoginObserver", "✅ Success response received: ${response.data}")

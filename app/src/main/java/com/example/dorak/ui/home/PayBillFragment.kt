@@ -62,9 +62,15 @@ class PayBillFragment : Fragment() {
         branchesViewModel.branchesResponse.observe(viewLifecycleOwner){branchesList->
             branchesListAdapter(branchesList)
             val location = branchAdapter?.getTopBranch()?.BranchNameEn
+            val branchCode = branchAdapter?.getTopBranch()?.BranchCode
+            val qId= args.qid
+            val serviceEn = args.serviceEn
+            val serviceAr= args.serviceAr
+
             binding.nearestBranch.text = location
             binding.nearestBranch.setOnClickListener {
-                findNavController().navigate(PayBillFragmentDirections.actionPaybillToPaybillDetails(location?:""))
+                findNavController().navigate(PayBillFragmentDirections.actionPaybillToPaybillDetails
+                    (location?:"",qId?:"",branchCode.toString()?:"",serviceEn?:"",serviceAr?:""))
             }
         }
         branchesViewModel.errorResponse.observe(viewLifecycleOwner){
@@ -73,8 +79,15 @@ class PayBillFragment : Fragment() {
     }
 
     private fun branchesListAdapter(branchList : List<BranchResponse>){
+        val qId= args.qid
+
+
         branchAdapter = BranchAdapter(branchList , onItemClick = {
-            findNavController().navigate(PayBillFragmentDirections.actionPaybillToPaybillDetails(it.BranchNameEn?:""))
+
+            val serviceEn = it.BranchNameEn
+            val serviceAr= it.BranchNameAr
+            findNavController().navigate(PayBillFragmentDirections.actionPaybillToPaybillDetails(
+                it.BranchNameEn?:"",qId?:"", it.BranchCode.toString()?:"",serviceEn?:"",serviceAr?:""))
         })
 
         binding.branchRecyclerView.layoutManager = LinearLayoutManager(requireContext())

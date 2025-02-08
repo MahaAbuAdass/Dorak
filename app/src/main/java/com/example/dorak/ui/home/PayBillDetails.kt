@@ -25,6 +25,7 @@ class PayBillDetails : Fragment() {
     private lateinit var mapView: MapView
     private lateinit var pointAnnotationManager: PointAnnotationManager
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -73,11 +74,16 @@ class PayBillDetails : Fragment() {
         binding.details.text = args.location
         binding.address.text = args.location
 
+        val qId= args.qid
+        val branchCode = args.branchCode
         val phone = PreferenceManager.getMobile(requireContext())
         binding.phone.text = phone
 
+        val serviceEn = args.serviceEn
+        val serviceAr= args.serviceAr
+
         binding.btnGenerateTicket.setOnClickListener {
-            findNavController().navigate(R.id.action_paybillDetails_to_ticketDetails)
+            findNavController().navigate(PayBillDetailsDirections.actionPaybillDetailsToTicketDetails(qId?:"",branchCode?:"",serviceEn?:"",serviceAr?:""))
         }
 
         binding.imgBack.setOnClickListener {
