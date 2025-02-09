@@ -14,11 +14,14 @@
         <action
             android:id="@+id/action_homeScreen_to_bookTicketFragment"
             app:destination="@id/bookTicketFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_my_ticket"
+            app:destination="@id/nav_my_ticket" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_my_ticket"
-        android:name="com.example.dorak.ui.MyTicketsFragment"
+        android:name="com.example.dorak.ui.myticket.MyTicketsFragment"
         tools:layout="@layout/my_tickets" />
 
     <fragment
@@ -100,9 +103,6 @@
             tools:layout="@layout/ticket_details"
             android:label="ticketDetailsFragment"
             >
-            <action
-                android:id="@+id/action_ticketDetails_to_myTicketFragment"
-                app:destination="@id/myTicketFragment" />
             <argument
                 android:name="qid"
                 app:argType="string" />
@@ -115,13 +115,10 @@
             <argument
                 android:name="service_ar"
                 app:argType="string" />
+            <action
+                android:id="@+id/action_ticketDetails_to_nav_my_ticket"
+                app:destination="@id/nav_my_ticket" />
         </fragment>
-
-        <fragment
-            android:id="@+id/myTicketFragment"
-            android:name="com.example.dorak.ui.MyTicketsFragment"
-            tools:layout="@layout/my_tickets"
-            />
 
     <fragment
         android:id="@+id/bookTicketFragment"
@@ -214,6 +211,14 @@
         android:id="@+id/ticket_details_bookTicketFragment"
         android:name="com.example.dorak.ui.home.bookticket.TicketDetailsBookTicket"
         tools:layout="@layout/ticket_details_book_ticket"
-       />
+      >
+        <argument
+            android:name="appno"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_ticket_details_bookTicketFragment_to_nav_my_ticket"
+            app:destination="@id/nav_my_ticket" />
+
+    </fragment>
 
 </navigation>

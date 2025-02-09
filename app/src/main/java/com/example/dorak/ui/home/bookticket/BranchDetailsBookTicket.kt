@@ -157,11 +157,14 @@ class BranchDetailsBookTicket : Fragment() {
 
     private fun observerBookTicketApi() {
         bookTicketViewModel.bookTicketResponse.observe(viewLifecycleOwner){bookTicket->
-            if (bookTicket.MsgStr == "This User has an appointment already for this date") {
-                Toast.makeText(requireContext(), bookTicket.MsgStr , Toast.LENGTH_SHORT).show()
+
+            if (bookTicket.MsgStr.equals("Appointment Booked successfully", ignoreCase = true)) {
+                findNavController().navigate(BranchDetailsBookTicketDirections.actionBranchDetailsBookTicketFragmentToTicketDetailsBookTicketFragment(bookTicket.appno?:""))
             }
             else{
-                findNavController().navigate(BranchDetailsBookTicketDirections.actionBranchDetailsBookTicketFragmentToTicketDetailsBookTicketFragment())
+        //        Toast.makeText(requireContext(), "You have an appointment already for this date" , Toast.LENGTH_SHORT).show()
+                findNavController().navigate(BranchDetailsBookTicketDirections.actionBranchDetailsBookTicketFragmentToTicketDetailsBookTicketFragment(bookTicket.appno?:""))
+
             }
 
             }

@@ -1,4 +1,4 @@
-package com.example.dorak.ui
+package com.example.dorak.ui.myticket
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,10 +7,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dorak.databinding.MyTicketsBinding
+import com.example.dorak.dataclass.BranchResponse
+import com.example.dorak.dataclass.MyTicketResponse
 import com.example.dorak.network.GenericViewModelFactory
+import com.example.dorak.ui.home.BranchAdapter
+import com.example.dorak.ui.home.PayBillFragmentDirections
 import com.example.dorak.util.PreferenceManager
-import com.example.dorak.viewmodels.BookTicketViewModel
 import com.example.dorak.viewmodels.MyTicketViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,6 +23,7 @@ import kotlinx.coroutines.launch
 class MyTicketsFragment :Fragment() {
     private lateinit var binding : MyTicketsBinding
     private lateinit var myTicketViewModel : MyTicketViewModel
+    var myTicketAdapter: MyTicketAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,9 +45,9 @@ class MyTicketsFragment :Fragment() {
         myTicketViewModel = ViewModelProvider(this, myTicketFactory).get(
             MyTicketViewModel::class.java)
 
-        binding.imgBack.setOnClickListener {
-            requireActivity().onBackPressedDispatcher.onBackPressed()
-        }
+//        binding.imgBack.setOnClickListener {
+//            requireActivity().onBackPressedDispatcher.onBackPressed()
+//        }
 
         callMyTicketApi()
         observerMyTicketViewModel()
@@ -55,13 +61,18 @@ class MyTicketsFragment :Fragment() {
         }
     }
     private fun observerMyTicketViewModel() {
-        myTicketViewModel.myTicketResponse.observe(viewLifecycleOwner){
-
+        myTicketViewModel.myTicketResponse.observe(viewLifecycleOwner){myTicketList->
+            myTicketListAdapter(myTicketList)
         }
 
         myTicketViewModel.errorResponse.observe(viewLifecycleOwner){
 
         }
+    }
 
+    private fun myTicketListAdapter(myTicket : List<MyTicketResponse>){
+        myTicketAdapter = MyTicketAdapter(myTicket )
+        binding.myTicketRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.myTicketRecyclerView.adapter = myTicketAdapter
     }
 }

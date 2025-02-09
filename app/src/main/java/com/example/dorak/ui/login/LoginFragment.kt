@@ -23,6 +23,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.dorak.R
 import com.example.dorak.databinding.LoginFragmentBinding
 import com.example.dorak.network.GenericViewModelFactory
@@ -101,6 +102,10 @@ class LoginFragment : Fragment() {
                 callLoginApi()
                 observerLoginApiViewModel()
             }
+        }
+
+        binding.tvSignUp.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.actionLoginScreenToSignupScreen())
         }
     }
 

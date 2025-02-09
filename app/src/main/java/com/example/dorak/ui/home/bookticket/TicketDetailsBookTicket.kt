@@ -24,6 +24,7 @@ import com.example.dorak.databinding.TicketDetailsBookTicketBinding
 import com.example.dorak.network.GenericViewModelFactory
 import com.example.dorak.ui.home.TicketDetailsArgs
 import com.example.dorak.util.PreferenceManager
+import com.example.dorak.viewmodels.AppointmentInfoViewModel
 import com.example.dorak.viewmodels.GenerateTicketViewModel
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
@@ -39,7 +40,9 @@ class TicketDetailsBookTicket : Fragment() {
 
     private lateinit var binding: TicketDetailsBookTicketBinding
     private lateinit var generateTicketViewModel: GenerateTicketViewModel
-   // private val args: TicketDetailsBookTicketA by navArgs()
+    private lateinit var appointmentInfoViewModel: AppointmentInfoViewModel
+
+    private val args: TicketDetailsBookTicketArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,29 +57,20 @@ class TicketDetailsBookTicket : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        binding.tvSelectedService.text = args.serviceEn
-//        binding.tvSelectedServiceAr.text = args.serviceAr
-//        Log.v("service en", args.serviceEn)
-//        Log.v("service ar", args.serviceAr)
 
-        val currentDateTime = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd   HH:mm:ss")
-        val formattedDateTime = currentDateTime.format(formatter)
 
-        binding.tvDate.text = formattedDateTime
-
-        val getTicketFactory = GenericViewModelFactory(GenerateTicketViewModel::class) {
-            GenerateTicketViewModel(requireContext())
+        val getTicketAppointmentFactory = GenericViewModelFactory(AppointmentInfoViewModel::class) {
+            AppointmentInfoViewModel(requireContext())
         }
 
-        generateTicketViewModel =
-            ViewModelProvider(this, getTicketFactory).get(GenerateTicketViewModel::class.java)
+        appointmentInfoViewModel =
+            ViewModelProvider(this, getTicketAppointmentFactory).get(AppointmentInfoViewModel::class.java)
 
-//        callGenerateTicketApi()
-//        observerGenerateTicketViewModel()
+        callGenerateTicketApi()
+        observerGenerateTicketViewModel()
 
         binding.btnMyTicket.setOnClickListener {
-            findNavController().navigate(R.id.action_ticketDetails_to_myTicketFragment)
+            findNavController().navigate(TicketDetailsBookTicketDirections.actionTicketDetailsBookTicketFragmentToNavMyTicket())
         }
 
         binding.imgBack.setOnClickListener {
@@ -86,23 +80,20 @@ class TicketDetailsBookTicket : Fragment() {
     }
 
     private fun observerGenerateTicketViewModel() {
-        Log.v("generating the ticket", "generating the ticket 1 ")
 
-        generateTicketViewModel.generateTicketResponse.observe(viewLifecycleOwner) { ticket ->
+        appointmentInfoViewModel.appointmentResponse.observe(viewLifecycleOwner) { ticket ->
             Log.v("response for API is", ticket.toString())
 
             binding.tvBranchEn.text = ticket.BranchNameEn
             binding.tvBranchAr.text = ticket.BranchNameAr
+            binding.tvTicketNumber.text = ticket.ApptNo
+            binding.tvSelectedService.text = ticket.QNameEn
+            binding.tvSelectedServiceAr.text = ticket.QNameAr
 
-            // ✅ Check if TicketNo is empty or null before displaying
-            val ticketNo = if (!ticket.TicketNo.isNullOrEmpty()) ticket.TicketNo else "N/A"
-            binding.tvTicketNumber.text = ticketNo
 
-            Log.v("generating the ticket", "Ticket Number: $ticketNo")
-
-            val ticket_id = ticket.TicketUniqueID
+            val ticket_id = ticket.ApptNo
             //           val ticket_id= "19991"
-            val qrBitmap = generateQRCode(ticket_id ?: "")
+            val qrBitmap = generateQRCode(ticket_id ?: "000")
 
             if (qrBitmap != null) {
                 binding.imageViewQr.setImageBitmap(qrBitmap)
@@ -110,7 +101,7 @@ class TicketDetailsBookTicket : Fragment() {
         }
 
 
-        generateTicketViewModel.errorResponse.observe(viewLifecycleOwner) {
+        appointmentInfoViewModel.errorResponse.observe(viewLifecycleOwner) {
             Log.v("error generating the ticket", it.toString())
         }
 
@@ -122,20 +113,11 @@ class TicketDetailsBookTicket : Fragment() {
     }
 
     private fun callGenerateTicketApi() {
-//        val qid = args.qid
-//        val branchCode = args.branchCode
-//        val userId = PreferenceManager.getUserId(requireContext()) ?: ""
-//
-//        if (qid.isNullOrEmpty() || branchCode.isNullOrEmpty() || userId.isEmpty()) {
-//            Log.e("Error", "Invalid input: qid=$qid, branchCode=$branchCode, userId=$userId")
-//            return // Stop execution to prevent crash
-//        }
-//
-//        Log.v("data is :", "$qid + $branchCode + $userId")
-//
-//        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
-//            generateTicketViewModel.getGeneratedTicket(qid, branchCode, userId)
-//        }
+        val app_no = args.appno
+
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+            appointmentInfoViewModel.getAppoitmentInfo(app_no?:"")
+        }
     }
 
     fun generateQRCode(id: String): Bitmap? {

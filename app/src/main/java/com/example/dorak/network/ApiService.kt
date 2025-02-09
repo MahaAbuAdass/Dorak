@@ -2,12 +2,14 @@ package com.example.dorak.network
 
 
 
+import com.example.dorak.dataclass.AppointmentResponse
 import com.example.dorak.dataclass.AvailableTimeReponse
 import com.example.dorak.dataclass.BookTicketResponse
 import com.example.dorak.dataclass.BranchResponse
 import com.example.dorak.dataclass.GenerateTicketResponse
 import com.example.dorak.dataclass.LoginSucessResponse
 import com.example.dorak.dataclass.MyTicketResponse
+import com.example.dorak.dataclass.RegisterResponse
 import com.example.dorak.dataclass.ServicesResponse
 import com.example.dorak.dataclass.TimeSlotsResponse
 import com.example.dorak.dataclass.WaitingCountResponse
@@ -73,6 +75,33 @@ interface ApiService {
     suspend fun getMyTicket(
         @Query("UserLogin") userLogin: String
     ): List<MyTicketResponse>
+
+    @GET("api/App_Appinfo")
+    suspend fun appointmentInfo(
+        @Query("ApptNo") apptNo: String
+    ): AppointmentResponse
+
+
+    @GET("api/APPT_SP_LoginRegister")
+    suspend fun registerUser(
+        @Query("FullNameEn") fullNameEn: String,
+        @Query("Address") address: String,
+        @Query("EmailID") emailID: String,
+        @Query("Contact_MobileNum") contactMobileNum: String,
+        @Query("NationalIDNo") nationalIDNo: String,
+        @Query("Login_Status") loginStatus: Int,
+        @Query("Contact_UserId") contactUserId: String,
+        @Query("Sex") sex: String,
+        @Query("DOB") dob: String,
+        @Query("NationalityEn") nationalityEn: String,
+        @Query("NationalityAr") nationalityAr: String,
+        @Query("PostalCode") postalCode: String,
+        @Query("Username") username: String,
+        @Query("txtPassword") txtPassword: String,
+        @Query("MRN") mrn: String,
+        @Query("FullNameAR") fullNameAR: String
+    ):RegisterResponse
+
 
 
 }

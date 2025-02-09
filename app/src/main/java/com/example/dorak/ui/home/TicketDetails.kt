@@ -79,7 +79,7 @@ class TicketDetails :Fragment() {
         observerGenerateTicketViewModel()
 
         binding.btnMyTicket.setOnClickListener {
-            findNavController().navigate(R.id.action_ticketDetails_to_myTicketFragment)
+            findNavController().navigate(TicketDetailsDirections.actionTicketDetailsToNavMyTicket())
         }
 
         binding.imgBack.setOnClickListener {

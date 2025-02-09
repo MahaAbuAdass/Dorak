@@ -206,13 +206,15 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                tools:text="pay bill"
+                tools:text="pay bill kskdjksd dsdsd ds ds  sdsd sds sdsd sds dsds sdsd"
+                android:gravity="center"
                 android:layout_marginTop="5dp"
                 android:id="@+id/tv_selected_service"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 app:layout_constraintTop_toBottomOf="@id/tv_selected_service"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

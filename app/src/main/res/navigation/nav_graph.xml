@@ -25,6 +25,21 @@
         android:name="com.example.dorak.ui.login.LoginFragment"
         tools:layout="@layout/login_fragment"
         android:label="SplashScreen"
-        />
+        >
+        <action
+            android:id="@+id/action_loginScreen_to_signupScreen"
+            app:destination="@id/signupScreen" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signupScreen"
+        android:name="com.example.dorak.ui.signup.SignUpFragment"
+        tools:layout="@layout/signup_fragment"
+        android:label="SplashScreen"
+        >
+        <action
+            android:id="@+id/action_signupScreen_to_loginScreen"
+            app:destination="@id/loginScreen" />
+    </fragment>
 
 </navigation>
