@@ -53,9 +53,15 @@ class PayBillBookTicket :Fragment() {
         observerGetAllBranchesViewModel()
 
         binding.cardViewTicket1.setOnClickListener {
+
             val location = branchAdapter?.getTopBranch()?.BranchNameEn
             val branchCode = branchAdapter?.getTopBranch()?.BranchCode.toString()
-            findNavController().navigate(PayBillBookTicketDirections.actionPayBillBookTicketFragmentToBookTicketDetailstFragment(location?:"",branchCode?:""))
+            val qID= args.qid
+            val serviceEn = args.serviceEn
+            val serviceAr = args.serviceAr
+
+            findNavController().navigate(PayBillBookTicketDirections.actionPayBillBookTicketFragmentToBookTicketDetailstFragment(
+                location?:"",branchCode?:"",qID,serviceEn,serviceAr))
         }
 
         binding.imgBack.setOnClickListener {
@@ -70,10 +76,14 @@ class PayBillBookTicket :Fragment() {
             val branchCode = branchAdapter?.getTopBranch()?.BranchCode.toString()
             binding.nearestBranch.text = location
             binding.nearestBranch.setOnClickListener {
+                val qID= args.qid
+                val serviceEn = args.serviceEn
+                val serviceAr = args.serviceAr
                 findNavController().navigate(
                     PayBillBookTicketDirections.actionPayBillBookTicketFragmentToBookTicketDetailstFragment(
                         location ?: "",
-                        branchCode ?: ""
+                        branchCode ?: "",
+                        qID, serviceEn,serviceAr
                     )
                 )
             }
@@ -85,7 +95,13 @@ class PayBillBookTicket :Fragment() {
 
     private fun branchesListAdapter(branchList : List<BranchResponse>){
         branchAdapter = BranchAdapter(branchList , onItemClick = {
-            findNavController().navigate(PayBillBookTicketDirections.actionPayBillBookTicketFragmentToBookTicketDetailstFragment(it.BranchNameEn?:"",it.BranchCode.toString()?:""))
+            val qID= args.qid
+            val serviceEn = args.serviceEn
+            val serviceAr = args.serviceAr
+
+            findNavController().navigate(PayBillBookTicketDirections.actionPayBillBookTicketFragmentToBookTicketDetailstFragment(
+
+                it.BranchNameEn?:"",it.BranchCode.toString()?:"" , qID,serviceEn,serviceAr))
         })
 
         binding.branchRecyclerView.layoutManager = LinearLayoutManager(requireContext())

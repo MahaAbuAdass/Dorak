@@ -38,7 +38,7 @@
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
             android:drawablePadding="10dp"
-            android:inputType="textPassword"
+            android:inputType="number"
             android:textColorHint="@color/text_light_grey"
             android:layout_gravity="center_vertical" />
 

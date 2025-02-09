@@ -110,20 +110,20 @@
                     tools:text="2024-2-2"
                     android:id="@+id/tv_date"/>
 
-<!--                <View-->
-<!--                    android:layout_width="20dp"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    />-->
+                <!--                <View-->
+                <!--                    android:layout_width="20dp"-->
+                <!--                    android:layout_height="match_parent"-->
+                <!--                    />-->
 
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textSize="16sp"-->
-<!--                    android:textStyle="bold"-->
-<!--                    tools:text="20:20"-->
-<!--                    android:id="@+id/tv_time"/>-->
+                <!--                <TextView-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    android:textColor="@color/black"-->
+                <!--                    android:textSize="16sp"-->
+                <!--                    android:textStyle="bold"-->
+                <!--                    tools:text="20:20"-->
+                <!--                    android:id="@+id/tv_time"/>-->
 
             </LinearLayout>
 

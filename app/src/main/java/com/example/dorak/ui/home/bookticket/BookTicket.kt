@@ -68,7 +68,7 @@ class BookTicket :Fragment() {
     private fun servicesListAdapter(servicesList: List<ServicesResponse?>) {
 
         serviceAdapter = ServiceAdapter(servicesList , onItemClick = {
-            findNavController().navigate(BookTicketDirections.actionBookTicketFragmentToPayBillBookTicketFragment(it.Qid.toString()))
+            findNavController().navigate(BookTicketDirections.actionBookTicketFragmentToPayBillBookTicketFragment(it.Qid.toString() , it.QNameEn ?:"",it.QNameAr?:""))
         })
 
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())

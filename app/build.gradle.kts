@@ -80,6 +80,9 @@ dependencies {
         implementation("com.mapbox.maps:android:11.9.2")
 
         implementation("com.prolificinteractive:material-calendarview:1.4.3")
+
+        implementation ("com.journeyapps:zxing-android-embedded:4.3.0")
+
     }
 
 //    implementation ("com.mapbox.mapboxsdk:mapbox-android-sdk:8.12.1")

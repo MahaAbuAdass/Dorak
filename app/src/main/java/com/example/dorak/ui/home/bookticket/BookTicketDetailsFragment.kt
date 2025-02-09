@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.dorak.R
@@ -31,6 +32,7 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.time.LocalDate
+import java.util.Date.parse
 
 class BookTicketDetailsFragment : Fragment() {
 
@@ -41,6 +43,8 @@ class BookTicketDetailsFragment : Fragment() {
 
     private val args: BookTicketDetailsFragmentArgs by navArgs()
     private val enabledDates: HashSet<CalendarDay> = hashSetOf()
+    private var date : String ?=null
+    private var time : String ?=null
 
     // List of enabled dates
 //    private val enabledDates = hashSetOf(
@@ -117,6 +121,22 @@ class BookTicketDetailsFragment : Fragment() {
 
         callGetAvailableTimeApi()
         observerGetAvailableTimeViewModel()
+
+        binding.imgBack.setOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
+
+        binding.btnConfirm.setOnClickListener {
+            val qId= args.qid
+            val branchCode = args.branchCode
+            val location = args.location
+            val serviceEn = args.serviceEn
+            val serviceAr = args.serviceAr
+
+            findNavController().navigate(BookTicketDetailsFragmentDirections.actionBookTicketDetailstFragmentToBranchDetailsBookTicketFragment(
+                branchCode,qId,branchCode,serviceEn,serviceAr , date?:"" ,time?:"" ))
+
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -131,6 +151,7 @@ class BookTicketDetailsFragment : Fragment() {
                         val localDate =
                             LocalDate.parse(dateString.substring(0, 10)) // Extract YYYY-MM-DD
                         Log.e("Date Parsing", localDate.toString())
+
 
                         // Create CalendarDay from the date
                         val calendarDay = CalendarDay.from(
@@ -196,8 +217,13 @@ class BookTicketDetailsFragment : Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("SuspiciousIndentation")
     private fun callTimeSlotsApi(selectedDate: String, sid: String) {
+
+        date = LocalDate.parse(selectedDate.substring(0, 10)).toString()
+        Log.v("selected date 34", date?:"")
+
         Log.v("selected date 34", selectedDate)
         Log.v("selected date 34", sid)
         val branchCode = args.branchCode
@@ -214,7 +240,7 @@ class BookTicketDetailsFragment : Fragment() {
 
     private fun observerTimeSlotsAPi() {
         getTimeSlotsViewModel.timeSlotsResponse.observe(viewLifecycleOwner) {timeSlotList->
-            timeSlotAdapter(timeSlotList)
+            context?.let { timeSlotAdapter(timeSlotList, it) }
         }
 
         getTimeSlotsViewModel.errorResponse.observe(viewLifecycleOwner) {
@@ -222,13 +248,13 @@ class BookTicketDetailsFragment : Fragment() {
         }
     }
 
-    private fun timeSlotAdapter(timeSlotList: List<TimeSlotsResponse>?) {
+    private fun timeSlotAdapter(timeSlotList: List<TimeSlotsResponse>? , context: Context) {
         val recyclerView = binding.timeSlotsRecyclerView
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 3) // 3 items per row
         recyclerView.adapter = timeSlotList?.let {
-            TimeSlotAdapter(it) { isSelected ->
-                binding.btnConfirm.isEnabled = isSelected
-
+            TimeSlotAdapter(it,context) { selectedTime ->
+                binding.btnConfirm.isEnabled = selectedTime.isNotEmpty()
+                time = selectedTime // Store selected time in fragment
             }
         }}
 

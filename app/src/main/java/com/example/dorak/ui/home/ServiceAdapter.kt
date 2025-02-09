@@ -1,5 +1,6 @@
 package com.example.dorak.ui.home
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,16 +35,15 @@ class ServiceAdapter (
         return serviceList.size
     }
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
 
         val item = serviceList[position]
         holder.serviceName.text = item?.QNameEn
 
-
-        holder.itemView.setOnClickListener {
             item?.let {
                 holder.bind(it)  // Calls the bind function, setting text and click listener
-            }
+
         }
 
 

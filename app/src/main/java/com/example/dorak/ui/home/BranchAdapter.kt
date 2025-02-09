@@ -44,10 +44,9 @@ class BranchAdapter  (
         val item = branchesList[position]
         holder.branchName.text = item?.BranchNameEn
 
-        holder.itemView.setOnClickListener {
             item?.let {
                 holder.bind(it)  // Calls the bind function, setting text and click listener
-            }
+
         }
 
 

@@ -30,15 +30,60 @@
         />
 
     <TextView
+        android:id="@+id/date_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:textSize="16sp"
+        android:layout_marginTop="20dp"
+        android:text="Ticket Date:"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_back" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:textSize="16sp"
+        android:textColor="@color/text_light_grey"
+        app:layout_constraintStart_toEndOf="@id/date_title"
+        app:layout_constraintTop_toTopOf="@id/date_title"
+        tools:text="Pay Bill" />
+    <TextView
+        android:id="@+id/title_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="4dp"
+        android:textSize="16sp"
+        android:text="Time:"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/date_title" />
+
+    <TextView
+        android:id="@+id/ticket_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:textSize="16sp"
+        android:textColor="@color/text_light_grey"
+        app:layout_constraintStart_toEndOf="@id/title_time"
+        app:layout_constraintTop_toTopOf="@id/title_time"
+        tools:text="Pay Bill" />
+
+    <TextView
         android:id="@+id/service_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="4dp"
         android:text="Service:"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/img_back" />
+        app:layout_constraintTop_toBottomOf="@id/title_time" />
 
     <TextView
         android:id="@+id/select_service"
@@ -179,7 +224,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="25dp"
         android:orientation="horizontal"
         android:weightSum="2"
@@ -222,7 +267,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
-                    tools:text="10m"
+                    android:text="10m"
                     android:textColor="@color/text_light_grey"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -276,7 +321,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
-                    tools:text="7"
+                    android:text="7"
                     android:textColor="@color/text_light_grey"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -303,8 +348,9 @@
         android:layout_marginEnd="30dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:text="Generate Ticket Now"
+        android:text="Book Ticket"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/linear_layout" />
 
 

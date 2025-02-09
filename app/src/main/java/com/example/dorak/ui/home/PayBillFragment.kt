@@ -40,6 +40,8 @@ class PayBillFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.textTitle.text = args.serviceEn
+
         val getBranchesFactory = GenericViewModelFactory(GetBranchesViewModel::class) {
             GetBranchesViewModel(requireContext())
         }
@@ -68,7 +70,7 @@ class PayBillFragment : Fragment() {
             val serviceAr= args.serviceAr
 
             binding.nearestBranch.text = location
-            binding.nearestBranch.setOnClickListener {
+            binding.cardViewTicket1.setOnClickListener {
                 findNavController().navigate(PayBillFragmentDirections.actionPaybillToPaybillDetails
                     (location?:"",qId?:"",branchCode.toString()?:"",serviceEn?:"",serviceAr?:""))
             }
@@ -84,8 +86,8 @@ class PayBillFragment : Fragment() {
 
         branchAdapter = BranchAdapter(branchList , onItemClick = {
 
-            val serviceEn = it.BranchNameEn
-            val serviceAr= it.BranchNameAr
+            val serviceEn = args.serviceEn
+            val serviceAr= args.serviceAr
             findNavController().navigate(PayBillFragmentDirections.actionPaybillToPaybillDetails(
                 it.BranchNameEn?:"",qId?:"", it.BranchCode.toString()?:"",serviceEn?:"",serviceAr?:""))
         })

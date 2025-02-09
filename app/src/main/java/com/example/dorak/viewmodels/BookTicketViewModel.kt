@@ -1,49 +1,44 @@
 package com.example.dorak.viewmodels
 
-
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.dorak.dataclass.BookTicketResponse
 import com.example.dorak.dataclass.GenerateTicketResponse
 import com.example.dorak.network.RetrofitBuilder
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
-class GenerateTicketViewModel(context: Context) : ViewModel()  {
+class BookTicketViewModel (context: Context) : ViewModel() {
 
     private val retrofitBuilder = RetrofitBuilder(context)
 
-    private val _generateTicketResponse = MutableLiveData<GenerateTicketResponse>()
-    val generateTicketResponse: LiveData<GenerateTicketResponse> = _generateTicketResponse
+    private val _bookTicketResponse = MutableLiveData<BookTicketResponse>()
+    val bookTicketResponse: LiveData<BookTicketResponse> = _bookTicketResponse
 
 
     private val _errorResponse = MutableLiveData<String?>()
     val errorResponse: LiveData<String?> = _errorResponse
 
 
-    suspend fun getGeneratedTicket(qID: String,branchCode: String,user_id: String){
+    suspend fun bookTicket(
+        apptDate: String,
+        qID: String,
+        branchCode: String,
+        user_id: String,
+        app_time: String
+    ) {
         viewModelScope.launch {
             try {
-                val response = retrofitBuilder.generateTicket(qID, branchCode, user_id)
-
-                if (response.TicketNo.isNullOrEmpty()) {
-                    Log.e("API Error", "TicketNo is missing from response")
-                    _errorResponse.postValue("Error: Ticket Number is missing")
-                } else {
-                    _generateTicketResponse.postValue(response)
-                }
-
-            } catch (e: HttpException){
-                Log.v("response generate ticket error", e.message.toString())
-
+                val response = retrofitBuilder.bookTicket(apptDate, qID, branchCode, user_id, app_time)
+                _bookTicketResponse.postValue(response)
+            } catch (e: HttpException) {
                 handleHttpException(e)
             } catch (e: Exception) {
                 // Handle other exceptions
-                Log.v("response generate ticket error", e.message.toString())
-
                 _errorResponse.postValue("Unexpected error occurred: ${e.message}")
             }
         }
@@ -60,5 +55,4 @@ class GenerateTicketViewModel(context: Context) : ViewModel()  {
             else -> _errorResponse.postValue("HTTP error: ${e.code()} - ${e.message}")
         }
     }
-
 }

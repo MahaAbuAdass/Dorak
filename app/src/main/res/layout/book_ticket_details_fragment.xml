@@ -28,6 +28,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/calender_card_view"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -39,8 +40,9 @@
             android:id="@+id/calendarView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/img_back" />
 
@@ -51,7 +53,8 @@
         android:id="@+id/time_slot_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="15dp"
         android:text="Pick time"
         android:textColor="@color/text_grey"
         android:textSize="18dp"
@@ -61,13 +64,15 @@
 
     <!-- Wrap the RecyclerView and the content in a ScrollView -->
     <android.widget.ScrollView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_height="0dp"
         android:id="@+id/scroll"
-        android:layout_marginBottom="70dp"
         app:layout_constraintBottom_toTopOf="@id/btn_confirm"
         app:layout_constraintTop_toBottomOf="@id/time_slot_title"
-        tools:ignore="MissingClass">
+
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -78,7 +83,9 @@
                 android:id="@+id/timeSlotsRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp" />
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                 />
 
         </LinearLayout>
     </android.widget.ScrollView>
@@ -87,9 +94,8 @@
         android:id="@+id/btn_confirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
         android:text="Confirm"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/scroll" />
