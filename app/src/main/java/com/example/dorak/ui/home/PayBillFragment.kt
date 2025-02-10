@@ -1,11 +1,16 @@
 package com.example.dorak.ui.home
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -18,6 +23,8 @@ import com.example.dorak.dataclass.BranchResponse
 import com.example.dorak.network.GenericViewModelFactory
 import com.example.dorak.viewmodels.GetAllServicesViewModel
 import com.example.dorak.viewmodels.GetBranchesViewModel
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -26,6 +33,9 @@ class PayBillFragment : Fragment() {
 
     private lateinit var branchesViewModel: GetBranchesViewModel
     var branchAdapter: BranchAdapter? = null
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private var latitude: Double? = null
+    private var longitude: Double? = null
 
     private val args: PayBillFragmentArgs by navArgs()
 
@@ -40,6 +50,15 @@ class PayBillFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+
+        // Check permission and get current location
+        if (checkLocationPermission()) {
+            getLastKnownLocation()
+        } else {
+            requestLocationPermission()
+        }
 
         binding.textTitle.text = args.serviceEn
 
@@ -61,7 +80,40 @@ class PayBillFragment : Fragment() {
         }
     }
 
-    private fun observerGetAllBranchesViewModel() {
+    @SuppressLint("MissingPermission") // Assuming permission is granted
+    private fun getLastKnownLocation() {
+        fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+            if (location != null) {
+                latitude = location.latitude
+                longitude = location.longitude
+                Log.d("Location", "Latitude: $latitude, Longitude: $longitude")
+            } else {
+                Log.e("Location", "Last known location is null")
+            }
+        }.addOnFailureListener {
+            Log.e("Location", "Error getting location: ${it.message}")
+        }
+    }
+
+    private fun checkLocationPermission(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            requireContext(),
+            Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun requestLocationPermission() {
+        // Request permission if not granted
+        ActivityCompat.requestPermissions(
+            requireActivity(),
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+            1
+        )
+    }
+
+
+
+private fun observerGetAllBranchesViewModel() {
         branchesViewModel.branchesResponse.observe(viewLifecycleOwner) { branchesList ->
             branchesListAdapter(branchesList)
 
