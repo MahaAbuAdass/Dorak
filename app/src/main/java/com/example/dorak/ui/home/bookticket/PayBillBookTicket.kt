@@ -1,117 +1,78 @@
 package com.example.dorak.ui.home.bookticket
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.dorak.R
 import com.example.dorak.databinding.PayBillBookTicketBinding
-import com.example.dorak.dataclass.BranchResponse
-import com.example.dorak.network.GenericViewModelFactory
-import com.example.dorak.ui.home.BranchAdapter
-import com.example.dorak.ui.home.PayBillFragmentArgs
-import com.example.dorak.ui.home.PayBillFragmentDirections
-import com.example.dorak.viewmodels.GetBranchesViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 
-class PayBillBookTicket :Fragment() {
+class PayBillBookTicket : Fragment() {
 
-    private lateinit var binding : PayBillBookTicketBinding
-
-    private lateinit var branchesViewModel: GetBranchesViewModel
-    var branchAdapter: BranchAdapter? = null
-
-    private val args: PayBillBookTicketArgs by navArgs()
+    private lateinit var binding: PayBillBookTicketBinding
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private var latitude: Double? = null
+    private var longitude: Double? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding= PayBillBookTicketBinding.inflate(inflater,container,false)
+        binding = PayBillBookTicketBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val getBranchesFactory = GenericViewModelFactory(GetBranchesViewModel::class) {
-            GetBranchesViewModel(requireContext())
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+
+        // Check permission and get current location
+        if (checkLocationPermission()) {
+            getLastKnownLocation()
+        } else {
+            requestLocationPermission()
         }
 
-        branchesViewModel = ViewModelProvider(this, getBranchesFactory).get(GetBranchesViewModel::class.java)
-
-        callGetAllBranchesApi()
-        observerGetAllBranchesViewModel()
-
-        binding.cardViewTicket1.setOnClickListener {
-
-            val location = branchAdapter?.getTopBranch()?.BranchNameEn
-            val branchCode = branchAdapter?.getTopBranch()?.BranchCode.toString()
-            val qID= args.qid
-            val serviceEn = args.serviceEn
-            val serviceAr = args.serviceAr
-
-            findNavController().navigate(PayBillBookTicketDirections.actionPayBillBookTicketFragmentToBookTicketDetailstFragment(
-                location?:"",branchCode?:"",qID,serviceEn,serviceAr))
-        }
-
-        binding.imgBack.setOnClickListener {
-            requireActivity().onBackPressedDispatcher.onBackPressed()
-        }
     }
 
-    private fun observerGetAllBranchesViewModel() {
-        branchesViewModel.branchesResponse.observe(viewLifecycleOwner) { branchesList ->
-            branchesListAdapter(branchesList)
-            val location = branchAdapter?.getTopBranch()?.BranchNameEn
-            val branchCode = branchAdapter?.getTopBranch()?.BranchCode.toString()
-            binding.nearestBranch.text = location
-            binding.nearestBranch.setOnClickListener {
-                val qID= args.qid
-                val serviceEn = args.serviceEn
-                val serviceAr = args.serviceAr
-                findNavController().navigate(
-                    PayBillBookTicketDirections.actionPayBillBookTicketFragmentToBookTicketDetailstFragment(
-                        location ?: "",
-                        branchCode ?: "",
-                        qID, serviceEn,serviceAr
-                    )
-                )
+    @SuppressLint("MissingPermission") // Assuming permission is granted
+    private fun getLastKnownLocation() {
+        fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+            if (location != null) {
+                latitude = location.latitude
+                longitude = location.longitude
+                Log.d("Location", "Latitude: $latitude, Longitude: $longitude")
+            } else {
+                Log.e("Location", "Last known location is null")
             }
-            branchesViewModel.errorResponse.observe(viewLifecycleOwner) {
-                Log.v("branch list error", "branch list error")
-            }
+        }.addOnFailureListener {
+            Log.e("Location", "Error getting location: ${it.message}")
         }
     }
 
-    private fun branchesListAdapter(branchList : List<BranchResponse>){
-        branchAdapter = BranchAdapter(branchList , onItemClick = {
-            val qID= args.qid
-            val serviceEn = args.serviceEn
-            val serviceAr = args.serviceAr
-
-            findNavController().navigate(PayBillBookTicketDirections.actionPayBillBookTicketFragmentToBookTicketDetailstFragment(
-
-                it.BranchNameEn?:"",it.BranchCode.toString()?:"" , qID,serviceEn,serviceAr))
-        })
-
-        binding.branchRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.branchRecyclerView.adapter = branchAdapter
+    private fun checkLocationPermission(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            requireContext(),
+            Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
-    private fun callGetAllBranchesApi() {
-        viewLifecycleOwner.lifecycleScope.launch (Dispatchers.IO){
-            val qId = args.qid
-            branchesViewModel.getAllBranches(qId)
-        }
+    private fun requestLocationPermission() {
+        // Request permission if not granted
+        ActivityCompat.requestPermissions(
+            requireActivity(),
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+            1
+        )
     }
 }

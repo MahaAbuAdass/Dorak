@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.example.dorak.MainActivity
 import com.example.dorak.databinding.MoreFragmentBinding
@@ -34,5 +35,12 @@ class MoreFragment:Fragment() {
             startActivity(intent)
             requireActivity().finish()  // Close LoginActivity so user can't go back
         }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // Exit the app when back is pressed in `nav_my_ticket`
+                requireActivity().finishAffinity()
+            }
+        })
     }
 }

@@ -25,6 +25,7 @@ import com.example.dorak.network.GenericViewModelFactory
 import com.example.dorak.util.PreferenceManager
 import com.example.dorak.viewmodels.GenerateTicketViewModel
 import com.example.dorak.viewmodels.GetAvailableTimeViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.common.BitMatrix
@@ -79,7 +80,13 @@ class TicketDetails :Fragment() {
         observerGenerateTicketViewModel()
 
         binding.btnMyTicket.setOnClickListener {
-            findNavController().navigate(TicketDetailsDirections.actionTicketDetailsToNavMyTicket())
+
+            val navController = findNavController()
+            val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+
+           // Clear back stack of nav_home and navigate to nav_my_ticket
+            navController.popBackStack(R.id.nav_home, true)
+            bottomNavigationView.selectedItemId = R.id.nav_my_ticket
         }
 
         binding.imgBack.setOnClickListener {

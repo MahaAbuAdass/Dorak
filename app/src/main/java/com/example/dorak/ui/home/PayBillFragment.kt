@@ -1,5 +1,6 @@
 package com.example.dorak.ui.home
 
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -61,23 +62,52 @@ class PayBillFragment : Fragment() {
     }
 
     private fun observerGetAllBranchesViewModel() {
-        branchesViewModel.branchesResponse.observe(viewLifecycleOwner){branchesList->
+        branchesViewModel.branchesResponse.observe(viewLifecycleOwner) { branchesList ->
             branchesListAdapter(branchesList)
-            val location = branchAdapter?.getTopBranch()?.BranchNameEn
-            val branchCode = branchAdapter?.getTopBranch()?.BranchCode
-            val qId= args.qid
-            val serviceEn = args.serviceEn
-            val serviceAr= args.serviceAr
 
-            binding.nearestBranch.text = location
-            binding.cardViewTicket1.setOnClickListener {
-                findNavController().navigate(PayBillFragmentDirections.actionPaybillToPaybillDetails
-                    (location?:"",qId?:"",branchCode.toString()?:"",serviceEn?:"",serviceAr?:""))
+            // Reference location (Fixed point to compare with)
+            val referenceLat = 32.564430947987574
+            val referenceLng = 35.855123465677664
+
+            // Find nearest branch
+            val nearestBranch = branchesList.minByOrNull { branch ->
+                val branchLat = branch.latitude?.toDoubleOrNull() ?: 0.0
+                val branchLng = branch.longitude?.toDoubleOrNull() ?: 0.0
+                calculateDistance(referenceLat, referenceLng, branchLat, branchLng)
+            }
+
+            if (nearestBranch != null) {
+                val location = nearestBranch.BranchNameEn
+                val branchCode = nearestBranch.BranchCode
+                val qId = args.qid
+                val serviceEn = args.serviceEn
+                val serviceAr = args.serviceAr
+
+                binding.nearestBranch.text = location
+                binding.cardViewTicket1.setOnClickListener {
+                    findNavController().navigate(
+                        PayBillFragmentDirections.actionPaybillToPaybillDetails(
+                            location ?: "",
+                            qId ?: "",
+                            branchCode.toString() ?: "",
+                            serviceEn ?: "",
+                            serviceAr ?: ""
+                        )
+                    )
+                }
             }
         }
-        branchesViewModel.errorResponse.observe(viewLifecycleOwner){
+
+        branchesViewModel.errorResponse.observe(viewLifecycleOwner) {
             Log.v("branch list error", "branch list error")
         }
+    }
+
+
+    private fun calculateDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Float {
+        val results = FloatArray(1)
+        Location.distanceBetween(lat1, lon1, lat2, lon2, results)
+        return results[0] // Distance in meters
     }
 
     private fun branchesListAdapter(branchList : List<BranchResponse>){

@@ -242,8 +242,9 @@
             android:id="@+id/my_ticket_recycler_view"
             app:layout_constraintTop_toBottomOf="@id/tv_my_ticket"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginEnd="5dp"
             />
 

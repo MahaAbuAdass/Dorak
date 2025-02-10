@@ -31,7 +31,7 @@
                 android:layout_marginStart="10dp"
                 tools:text="Pay Bill"
                 android:textColor="@color/green"
-                android:textSize="20sp"
+                android:textSize="17sp"
                 android:layout_margin="10dp"
                 android:id="@+id/tv_service"
                 />
@@ -44,15 +44,15 @@
                 app:layout_constraintStart_toStartOf="@id/tv_service"
                 android:text="C1"
                 android:textColor="@color/text_light_grey"
-                android:textSize="22sp"
+                android:textSize="20sp"
                 android:id="@+id/tv_number"
                 />
 
 
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:src="@drawable/calender"
                 app:layout_constraintTop_toBottomOf="@id/tv_number"
                 app:layout_constraintStart_toStartOf="@id/tv_number"
@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 tools:text="12 JAN 2025 - 10:00 AM"
                 android:textColor="@color/text_grey"
-                android:textSize="17sp"
+                android:textSize="15sp"
                 android:id="@+id/tv_date"
                 app:layout_constraintTop_toTopOf="@id/img_calender"
                 app:layout_constraintBottom_toBottomOf="@id/img_calender"
@@ -74,8 +74,8 @@
                 />
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:src="@drawable/map_grey"
                 app:layout_constraintTop_toBottomOf="@id/img_calender"
                 app:layout_constraintStart_toStartOf="@id/img_calender"
@@ -88,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:text="Ibid Mall Branch"
                 android:textColor="@color/text_grey"
-                android:textSize="17sp"
+                android:textSize="15sp"
                 android:id="@+id/tv_location"
                 app:layout_constraintTop_toTopOf="@id/img_map"
                 app:layout_constraintBottom_toBottomOf="@id/img_map"
@@ -108,7 +108,7 @@
                 app:strokeColor="@color/green"
                 app:strokeWidth="1dp"
                 android:layout_margin="15dp"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 />
 
             <Button
@@ -121,7 +121,7 @@
                 android:text="Check in"
                 android:paddingStart="60dp"
                 android:paddingEnd="60dp"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"

@@ -33,7 +33,7 @@
         android:id="@+id/service_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:text="Service:"
         android:textStyle="bold"
@@ -54,9 +54,9 @@
         android:id="@+id/branch_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:text="Branch:"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="4dp"
+        android:text="Branch:"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/service_title" />
@@ -65,11 +65,11 @@
         android:id="@+id/details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Irbid Mall Branch"
         android:layout_marginStart="5dp"
         android:textColor="@color/text_light_grey"
         app:layout_constraintStart_toEndOf="@id/branch_title"
         app:layout_constraintTop_toTopOf="@id/branch_title"
+        tools:text="Irbid Mall Branch"
 
         />
 
@@ -78,9 +78,9 @@
         android:id="@+id/title_hour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:text="Hours:"
         android:textStyle="bold"
-        android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="@id/service_title"
         app:layout_constraintTop_toBottomOf="@id/branch_title"
 
@@ -123,11 +123,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
+        android:text="Irbid"
         android:textColor="@color/text_light_grey"
         app:layout_constraintStart_toEndOf="@id/title_address"
         app:layout_constraintTop_toTopOf="@id/title_address"
-        app:layout_goneMarginStart="5dp"
-        tools:text="irbid" />
+        app:layout_goneMarginStart="5dp" />
 
     <TextView
         android:id="@+id/title_phone"
@@ -145,11 +145,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
+        android:text="+96227201830"
         android:textColor="@color/text_light_grey"
         app:layout_constraintStart_toEndOf="@id/title_phone"
         app:layout_constraintTop_toTopOf="@id/title_phone"
-        app:layout_goneMarginStart="5dp"
-        android:text="+96227201830" />
+        app:layout_goneMarginStart="5dp" />
 
 
     <!--    <ImageView-->
@@ -222,11 +222,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
-                    tools:text="10m"
                     android:textColor="@color/text_light_grey"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_ticket" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_ticket"
+                    tools:text="10m" />
 
                 <View
                     android:id="@+id/spacer"
@@ -276,11 +276,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
-                    tools:text="7"
                     android:textColor="@color/text_light_grey"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_book_ticket" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_book_ticket"
+                    tools:text="7" />
 
                 <View
                     android:id="@+id/spacer_1"

@@ -47,13 +47,13 @@ class PayBillDetails : Fragment() {
         mapView.getMapboxMap().loadStyleUri(Style.MAPBOX_STREETS) {
 
 
-            val location = Point.fromLngLat(35.85533188547881, 32.5645377661438)
+            val location = Point.fromLngLat(35.85512609609165, 32.56442604997418)
 
             // Move the camera to the specific location
             mapView.getMapboxMap().setCamera(
                 CameraOptions.Builder()
                     .center(location)
-                    .zoom(14.0)  // Adjusted zoom level to focus on the location
+                    .zoom(15.0)  // Adjusted zoom level to focus on the location
                     .pitch(0.0)
                     .bearing(0.0)
                     .build()
@@ -89,7 +89,7 @@ class PayBillDetails : Fragment() {
 
         binding.title.text = args.location
         binding.details.text = args.location
-        binding.address.text = args.location
+        //binding.address.text = args.location
 
         binding.selectService.text = args.serviceEn
 

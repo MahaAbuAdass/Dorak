@@ -129,6 +129,7 @@
             android:id="@+id/action_bookTicketFragment_to_payBillBookTicketFragment"
             app:destination="@id/payBillBookTicketFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/payBillBookTicketFragment"
         android:name="com.example.dorak.ui.home.bookticket.PayBillBookTicket"

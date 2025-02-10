@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -18,8 +19,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pay Bill"
+        tools:text="Pay Bill"
         android:layout_marginStart="5dp"
+        android:id="@+id/title"
         app:layout_constraintStart_toEndOf="@id/img_back"
         app:layout_constraintTop_toTopOf="@id/img_back"
         app:layout_constraintBottom_toBottomOf="@id/img_back"
@@ -125,7 +127,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/select_branch"
         android:layout_margin="5dp"
-        android:paddingBottom="30dp"
+        android:paddingBottom="80dp"
+        android:layout_marginBottom="100dp"
 
         />
 

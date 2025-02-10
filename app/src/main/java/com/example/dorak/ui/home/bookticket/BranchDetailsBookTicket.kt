@@ -100,13 +100,19 @@ class BranchDetailsBookTicket : Fragment() {
         val date = args.date
         val time = args.time
         val location = args.location
+
         val serviceEn = args.serviceEn
         val serviceAr = args.serviceAr
+        val branchCode = args.branchCode
+
+        Log.v("branch code : " , branchCode)
+        Log.v("location code : " , location)
+
         val userId= PreferenceManager.getUserId(requireContext())
 
-        binding.title.text = location
-        binding.details.text = location
-        binding.address.text = location
+        binding.title.text = branchCode
+        binding.details.text = branchCode
+     //   binding.address.text = branchCode
 
         binding.selectService.text = serviceEn
         binding.date.text = date
@@ -114,7 +120,6 @@ class BranchDetailsBookTicket : Fragment() {
 
 
         val qId= args.qid
-        val branchCode = args.branchCode
 
         val phone = PreferenceManager.getMobile(requireContext())
         //binding.phone.text = phone
@@ -171,7 +176,10 @@ class BranchDetailsBookTicket : Fragment() {
 
 
         bookTicketViewModel.errorResponse.observe(viewLifecycleOwner){
-            Log.v("error generating the ticket",it.toString())
+            Toast.makeText(requireContext(), "make sure to select time and date", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(BranchDetailsBookTicketDirections.actionBranchDetailsBookTicketFragmentToTicketDetailsBookTicketFragment("3232"))
+
+            Log.v("make sure to select time and date",it.toString())
 
         }
 

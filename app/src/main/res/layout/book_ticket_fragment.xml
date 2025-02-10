@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:text="Book Ticket"
+        android:id="@+id/title"
         android:textColor="@color/text_grey"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@id/img_back"

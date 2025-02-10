@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_loginScreen_to_signupScreen"
             app:destination="@id/signupScreen" />
+        <action
+            android:id="@+id/action_loginScreen_to_forgetPasswordScreen"
+            app:destination="@id/forgetPasswordScreen" />
     </fragment>
 
     <fragment
@@ -41,5 +44,23 @@
             android:id="@+id/action_signupScreen_to_loginScreen"
             app:destination="@id/loginScreen" />
     </fragment>
+
+    <fragment
+        android:id="@+id/forgetPasswordScreen"
+        android:name="com.example.dorak.ui.login.ForgetPasswordFragment"
+        tools:layout="@layout/forget_password_layout"
+        android:label="SplashScreen"
+       >
+        <action
+            android:id="@+id/action_forgetPasswordScreen_to_verificationPasswordScreen"
+            app:destination="@id/verificationPasswordScreen" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/verificationPasswordScreen"
+        android:name="com.example.dorak.ui.login.VerificationFragment"
+        tools:layout="@layout/verification_fragment"
+        android:label="SplashScreen"
+        />
 
 </navigation>

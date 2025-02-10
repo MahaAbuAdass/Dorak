@@ -12,7 +12,10 @@ class RetrofitBuilder(context: Context) {
 
     private val apiService: ApiService by lazy {
         // val baseUrl = PreferenceManager.getBaseUrl(context)
-        val baseUrl = "http://192.168.30.50/APIPub2509/"
+    //    val baseUrl = "http://192.168.30.50/APIPub2509/"
+        val baseUrl = "http://aismcydb-001-site3.atempurl.com/"
+
+
 
         val retrofit = Retrofit.Builder()
             .baseUrl(baseUrl ?: "")

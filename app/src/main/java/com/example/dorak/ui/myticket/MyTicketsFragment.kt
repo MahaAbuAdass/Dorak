@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -51,6 +52,13 @@ class MyTicketsFragment :Fragment() {
 
         callMyTicketApi()
         observerMyTicketViewModel()
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // Exit the app when back is pressed in `nav_my_ticket`
+                requireActivity().finishAffinity()
+            }
+        })
 
     }
     private fun callMyTicketApi() {

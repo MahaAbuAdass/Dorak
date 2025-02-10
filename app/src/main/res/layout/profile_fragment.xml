@@ -186,7 +186,7 @@
                 android:layout_marginEnd="15dp"
                 android:textColor="@color/text_light_grey"
                 android:textSize="16sp"
-                android:text="test@mail.com"
+                android:text="test@gmail.com"
                 android:id="@+id/tv_useremail"
                 />
 

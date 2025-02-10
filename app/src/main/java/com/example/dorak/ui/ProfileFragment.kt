@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.example.dorak.databinding.ProfileFragmentBinding
 import com.example.dorak.util.PreferenceManager
@@ -28,8 +29,15 @@ class ProfileFragment : Fragment() {
         val gender = PreferenceManager.getGender(requireContext())
         val mobile = PreferenceManager.getMobile(requireContext())
         binding.tvName.text = username
-        binding.tvGender.text = gender
+        //binding.tvGender.text = gender
         binding.tvNumber.text = mobile
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // Exit the app when back is pressed in `nav_my_ticket`
+                requireActivity().finishAffinity()
+            }
+        })
 
 
     }

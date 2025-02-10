@@ -1,10 +1,19 @@
 package com.example.dorak.ui.home
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -93,7 +102,40 @@ class HomeFragment : Fragment() {
 
         callMyTicketApi()
         observerMyTicketViewModel()
+        checkLocationPermission()
+
     }
+
+    private fun checkLocationPermission() {
+        when {
+            // If permission is already granted
+            ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED -> {
+             //   Toast.makeText(requireContext(), "Location permission already granted!", Toast.LENGTH_SHORT).show()
+            }
+
+            // If permission is not granted, request it
+            else -> {
+                requestLocationPermissionLauncher.launch(
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
+                )
+            }
+        }
+    }
+
+    // Request location permissions
+    private val requestLocationPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            val fineLocationGranted = permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false
+            val coarseLocationGranted = permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false
+
+            if (fineLocationGranted || coarseLocationGranted) {
+                Toast.makeText(requireContext(), "Location permission granted!", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "Location permission denied!", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
 
     private fun callMyTicketApi() {
         val userId= PreferenceManager.getUserId(requireContext())

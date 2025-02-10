@@ -17,6 +17,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -119,8 +120,15 @@ class SignUpFragment:Fragment() {
     }
 
     private fun observerSignUpViewModel() {
-        registerUserViewModel.registrationResponse.observe(viewLifecycleOwner){
-            showPopup()
+        registerUserViewModel.registrationResponse.observe(viewLifecycleOwner){response->
+            if (response.MsgStr.equals("Registered Successfully", ignoreCase = true)) {
+                findNavController().navigate(SignUpFragmentDirections.actionSignupScreenToLoginScreen())
+                //   showPopup()
+        }
+            else{
+
+                Toast.makeText(requireContext(), "User Already exist", Toast.LENGTH_SHORT).show()
+            }
         }
 
         registerUserViewModel.errorResponse.observe(viewLifecycleOwner){

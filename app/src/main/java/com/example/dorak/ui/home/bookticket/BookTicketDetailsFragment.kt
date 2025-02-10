@@ -134,7 +134,7 @@ class BookTicketDetailsFragment : Fragment() {
             val serviceAr = args.serviceAr
 
             findNavController().navigate(BookTicketDetailsFragmentDirections.actionBookTicketDetailstFragmentToBranchDetailsBookTicketFragment(
-                branchCode,qId,branchCode,serviceEn,serviceAr , date?:"" ,time?:"" ))
+                branchCode,qId,location,serviceEn,serviceAr , date?:"" ,time?:"" ))
 
         }
     }

@@ -89,6 +89,7 @@ class TicketDetailsBookTicket : Fragment() {
             binding.tvTicketNumber.text = ticket.ApptNo
             binding.tvSelectedService.text = ticket.QNameEn
             binding.tvSelectedServiceAr.text = ticket.QNameAr
+            binding.tvDate.text = ticket.ApptDate
 
 
             val ticket_id = ticket.ApptNo

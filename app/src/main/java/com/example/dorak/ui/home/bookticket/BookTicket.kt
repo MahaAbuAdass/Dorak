@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dorak.databinding.BookTicketFragmentBinding
 import com.example.dorak.dataclass.ServicesResponse
@@ -68,7 +69,8 @@ class BookTicket :Fragment() {
     private fun servicesListAdapter(servicesList: List<ServicesResponse?>) {
 
         serviceAdapter = ServiceAdapter(servicesList , onItemClick = {
-            findNavController().navigate(BookTicketDirections.actionBookTicketFragmentToPayBillBookTicketFragment(it.Qid.toString() , it.QNameEn ?:"",it.QNameAr?:""))
+            findNavController().navigate(BookTicketDirections.actionBookTicketFragmentToPayBillBookTicketFragment(
+                it.Qid.toString() , it.QNameEn ?:"",it.QNameAr?:""))
         })
 
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())

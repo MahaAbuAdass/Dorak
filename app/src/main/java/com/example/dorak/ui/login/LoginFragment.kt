@@ -1,7 +1,6 @@
 package com.example.dorak.ui.login
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
@@ -107,6 +106,10 @@ class LoginFragment : Fragment() {
         binding.tvSignUp.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.actionLoginScreenToSignupScreen())
         }
+
+        binding.tvForgetPass.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.actionLoginScreenToForgetPasswordScreen())
+        }
     }
 
     private fun observerLoginApiViewModel() {
@@ -137,7 +140,10 @@ class LoginFragment : Fragment() {
                     )
 
                     Log.d("LoginObserver", "✅ Success response received: ${response.data}")
-                    showPopup()  // Show success popup
+                    //showPopup()  // Show success popup
+                    val intent = Intent(requireContext(), HomeActivity::class.java)
+                    startActivity(intent)
+                    requireActivity().finish()  // Close LoginActivity so user can't go back
 
                     // Reset LiveData after handling
                     loginViewModel.resetLoginResponse()
