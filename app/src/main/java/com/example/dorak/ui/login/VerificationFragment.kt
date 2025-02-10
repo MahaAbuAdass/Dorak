@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.dorak.R
 import com.example.dorak.databinding.VerificationFragmentBinding
 import com.google.android.material.card.MaterialCardView
@@ -56,6 +58,16 @@ class VerificationFragment : Fragment() {
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             })
         }
+
+        binding.btnVerify.setOnClickListener {
+            // Check if all EditTexts are filled
+            if (editTexts.all { it.text.isNotEmpty() }) {
+                findNavController().navigate(VerificationFragmentDirections.actionVerificationPasswordScreenToNewPassword())
+            } else {
+                // Show toast message if any EditText is empty
+                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun checkFieldsAndUpdateStroke(
@@ -78,5 +90,3 @@ class VerificationFragment : Fragment() {
         cardView4.strokeColor = strokeColor
     }
 }
-
-

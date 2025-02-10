@@ -49,30 +49,27 @@ class ForgetPasswordFragment : Fragment() {
             binding.etPasswordError.visibility = View.GONE
 
             // Reset field background colors
-            binding.etMobile.background = ContextCompat.getDrawable(requireContext(), R.drawable.custom_edit_text)
+            binding.etMobile.background =
+                ContextCompat.getDrawable(requireContext(), R.drawable.custom_edit_text)
 
             var isValid = true
 
             // Check if mobile is empty
             if (binding.etMobile.text.isNullOrEmpty()) {
-                binding.etMobile.background = ContextCompat.getDrawable(requireContext(), R.drawable.red_border)
+                binding.etMobile.background =
+                    ContextCompat.getDrawable(requireContext(), R.drawable.red_border)
                 binding.etPasswordError.visibility = View.VISIBLE
                 isValid = false
             }
 
 
-
             // If both fields are valid, show the popup
             if (isValid) {
                 mobileNumber = binding.etMobile.text.toString()
-               showPopup()
-
+                //showPopup()
+                findNavController().navigate(ForgetPasswordFragmentDirections.actionForgetPasswordScreenToVerificationPasswordScreen())
             }
         }
-        binding.btnResetPass.setOnClickListener {
-            findNavController().navigate(ForgetPasswordFragmentDirections.actionForgetPasswordScreenToVerificationPasswordScreen())
-        }
-
     }
 
     private fun showPopup() {

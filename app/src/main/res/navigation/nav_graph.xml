@@ -61,6 +61,19 @@
         android:name="com.example.dorak.ui.login.VerificationFragment"
         tools:layout="@layout/verification_fragment"
         android:label="SplashScreen"
-        />
-
+        >
+        <action
+            android:id="@+id/action_verificationPasswordScreen_to_new_password"
+            app:destination="@id/new_password" />
+    </fragment>
+    <fragment
+        android:id="@+id/new_password"
+        android:name="com.example.dorak.ui.login.NewPassword"
+        tools:layout="@layout/new_password"
+        android:label="SplashScreen"
+        >
+        <action
+            android:id="@+id/action_new_password_to_loginScreen"
+            app:destination="@id/loginScreen" />
+    </fragment>
 </navigation>

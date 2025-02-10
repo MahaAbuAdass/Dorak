@@ -167,8 +167,8 @@ class BranchDetailsBookTicket : Fragment() {
                 findNavController().navigate(BranchDetailsBookTicketDirections.actionBranchDetailsBookTicketFragmentToTicketDetailsBookTicketFragment(bookTicket.appno?:""))
             }
             else{
-        //        Toast.makeText(requireContext(), "You have an appointment already for this date" , Toast.LENGTH_SHORT).show()
-                findNavController().navigate(BranchDetailsBookTicketDirections.actionBranchDetailsBookTicketFragmentToTicketDetailsBookTicketFragment(bookTicket.appno?:""))
+                Toast.makeText(requireContext(), "You have an appointment already for this date" , Toast.LENGTH_SHORT).show()
+        //        findNavController().navigate(BranchDetailsBookTicketDirections.actionBranchDetailsBookTicketFragmentToTicketDetailsBookTicketFragment(bookTicket.appno?:""))
 
             }
 
